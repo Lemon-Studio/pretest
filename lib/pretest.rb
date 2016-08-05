@@ -15,9 +15,29 @@ module Pretest
       Dir.chdir(name)
       dir_list
       file_list
+      list_project
+    end
+
+    if ARGV.count == 1 and ARGV != "help"
+      puts "O comando para criação de projetos foi alterado de:
+'pretest nome_do_projeto' para 'pretest project nome_do_projeto'."
     end
 
     no_commands do
+
+      def list_project
+        puts "Project Created:
+
+Gemfile
+cucumber.yml
+data
+features
+features/step_definitions
+features/support
+features/support/env.rb
+feature/support/hooks.rb
+feature/support/pages"
+      end
 
       def file_list
         create_file("Gemfile", "source 'https://rubygems.org'
