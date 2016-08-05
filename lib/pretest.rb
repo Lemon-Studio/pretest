@@ -49,6 +49,7 @@ gem 'cucumber'
 gem 'rspec'
 gem 'rake'
 gem 'selenium-webdriver'
+gem 'poltergeist'
 gem 'page-object'")
         create_file("cucumber.yml", "default: --no-source --color --format pretty")
         create_file("features/step_definitions/step_definitions.rb", "")
