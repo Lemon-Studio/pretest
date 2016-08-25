@@ -1,0 +1,10 @@
+class Example
+
+  include Capybara::DSL
+
+  def google_search(field, value)
+    fill_in(field, with: value)
+    click_on()
+  end
+
+end

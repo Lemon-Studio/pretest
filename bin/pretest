@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby -U
 
-require 'pretest'
+require 'pretest/cli'
 
-Pretest::StructureGenerator.start( ARGV )
+Pretest::StructureGenerator.start

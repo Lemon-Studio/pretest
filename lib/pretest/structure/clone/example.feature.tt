@@ -1,0 +1,16 @@
+Feature: Google Validations
+
+  @tag1
+  Scenario: Validate google search functions
+  Given I am on "https://google.com"
+  And I fill in "" with ""
+  When I press ":enter" button
+  Then I expect to find "" text
+
+
+  @tag2
+  Scenario: Validate google search functions using page object
+  Given I am on "https://google.com"
+  When I search for ""
+  And I click on first link
+  Then I expect to find "" text
