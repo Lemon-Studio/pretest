@@ -28,6 +28,8 @@ module Pretest
         when mac?
           set_mac_env
         when windows?
+          Dir.mkdir("C:\\env_folder")
+          system "setx PATH %PATH%;C:\\env_folder"
           set_versions
           set_bits
           set_windows_env
@@ -83,8 +85,6 @@ module Pretest
          else
          brew update
          fi"
-         sleep(10)
-         system "clear"
          system "brew install phantomjs"
          system "brew install chromedriver"
         end
