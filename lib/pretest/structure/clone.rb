@@ -54,12 +54,6 @@ module Pretest
         template "example.rb.tt", "#{name}/features/support/pages/example.rb"
       end
 
-      #desc "env_config", "This will configure your environment variables folder"
-
-      def env_config
-        raise_env
-      end
-
       no_commands do
 
 
@@ -73,22 +67,6 @@ module Pretest
           create_dir("features/support")
           create_dir("features/step_definitions")
           create_dir("features/support/pages")
-        end
-
-        def mac?
-          (/darwin/ =~ RUBY_PLATFORM) != nil
-        end
-
-        def windows?
-          (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
-        end
-
-        def unix?
-          !windows?
-        end
-
-        def linux?
-          unix? and not mac?
         end
 
       end

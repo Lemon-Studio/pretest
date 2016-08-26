@@ -29,15 +29,14 @@ module Pretest
           set_mac_env
         when windows?
           Dir.mkdir("C:\\env_folder") unless Dir.glob("C:\\env_folder") != nil
+          Dir.chdir("C:\\env_folder")
           system 'setx PATH "%PATH%;C:\\env_folder"'
           set_versions
           set_bits
           set_windows_env
           unzip_file("chromedriver_win32.zip", ".")
           unzip_file("phantomjs-#{@phantomjs_version}-windows.zip", ".")
-          system "move chromedriver.exe C:\\env_folder"
-          system "move phantomjs-#{@phantomjs_version}-windows C:\\env_folder"
-          system "copy C:\\env_folder\\phantomjs-#{@phantomjs_version}-windows\\bin\\phantomjs.exe C:\\env_folder"
+          system "copy phantomjs-#{@phantomjs_version}-windows\\bin\\phantomjs.exe C:\\env_folder"
         end
       end
 
@@ -63,8 +62,8 @@ module Pretest
           zipfile = url
           resource = RestClient::Resource.new(
               zipfile,
-              :timeout => nil,
-              :open_timeout => nil
+              :timeout => 10,
+              :open_timeout => 10
           )
           response = resource.get
           if response.code == 200
