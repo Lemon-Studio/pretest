@@ -31,8 +31,8 @@ module Pretest
           set_versions
           set_bits
           set_windows_env
-          unzip_files("chromedriver_win32.zip", ".")
-          unzip_files("phantomjs-#{@phantomjs_version}-windows.zip", ".")
+          unzip_file("chromedriver_win32.zip", ".")
+          unzip_file("phantomjs-#{@phantomjs_version}-windows.zip", ".")
           system "move chromedriver.exe C:\\env_folder"
           system "move phantomjs-#{@phantomjs_version}-windows C:\\env_folder"
           system "copy C:\\env_folder\\phantomjs-#{@phantomjs_version}-windows\\bin\\phantomjs.exe C:\\env_folder"
