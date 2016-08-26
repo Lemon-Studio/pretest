@@ -1,0 +1,25 @@
+<% if web_scaffold == 'true' -%>
+Given(/^I am on "([^"]*)"$/) do |site|
+  visit(site)
+end
+
+Given(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+  fill_in(field, with: value)
+end
+
+When(/^I press "([^"]*)" button in "([^"]*)" field$/) do |key, field|
+  find(field).native.send_keys(key.to_sym)
+end
+
+Then(/^I expect to find "([^"]*)" text$/) do |txt|
+  assert_text(txt, wait: 10)
+end
+
+When(/^I search for "([^"]*)"$/) do |val|
+  Example.new.google_search(val)
+end
+
+When(/^I click on first link with text "([^"]*)"$/) do |txt|
+  first("a", text: txt, wait: 5).click
+end
+<% end -%>

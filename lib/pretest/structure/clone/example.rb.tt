@@ -1,10 +1,12 @@
+<% if web_scaffold == 'true' -%>
 class Example
 
   include Capybara::DSL
 
-  def google_search(field, value)
-    fill_in(field, with: value)
-    click_on()
+  def google_search(value)
+    fill_in("lst-ib", with: value)
+    click_on("Pesquisar")
   end
 
 end
+<% end -%>

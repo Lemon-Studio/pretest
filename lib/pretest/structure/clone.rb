@@ -12,6 +12,7 @@ module Pretest
       argument :web, type: :string, desc: "Set Project Structure to Web Automation"
       argument :ios, type: :string, desc: "Set Project Structure to iOS Mobile Automation"
       argument :android, type: :string, desc: "Set Project Structure to Android Mobile Automation"
+      argument :web_scaffold, type: :string, desc: "Set Project Structure to Web Automation and Creates some examples"
 
       desc "Creates a new project for tests with Cucumber"
 
@@ -45,45 +46,22 @@ module Pretest
         template "step_definitions.rb.tt", "#{name}/features/step_definitions/step_definitions.rb"
       end
 
-      #def feature_clone
-        #template
-      #end
+      def feature_clone
+        template "example.feature.tt", "#{name}/features/example.feature"
+      end
+
+      def page_clone
+        template "example.rb.tt", "#{name}/features/support/pages/example.rb"
+      end
 
       #desc "env_config", "This will configure your environment variables folder"
 
-      #def env_config
-      #  raise_env
-      #end
+      def env_config
+        raise_env
+      end
 
       no_commands do
 
-        def raise_env
-          case true
-          when linux?
-            puts "Linux"
-          when mac?
-            puts "Mac"
-          when windows?
-            Dir.chdir("C:/")
-            Dir.mkdir("env_folder")
-            sytem "setx PATH %PATH%;C:\\env_folder"
-            puts "\e[4mPlease reboot your CMD to load the environment variables.\e[24m
-
-That command has created a new folder (C:/env_folder) to store all
-the new webdrivers that need to be installed to run scenarios with
-(Chrome, IE, PhantomJS, Firefox).
-After complete the download of each webdriver, we must move each .exe
-to the (C:/env_folder).
-
-\e[4mWebDrivers:\e[24m
-
-http://phantomjs.org/ (PhantomJS)
-http://chromedriver.storage.googleapis.com/index.html (ChromeDriver)
-http://selenium-release.storage.googleapis.com/index.html (IE)
-https://ftp.mozilla.org/pub/firefox/releases/ (Firefox Old Releases 32x)"
-
-          end
-        end
 
         def create_dir(dir)
           Dir.mkdir(dir) unless File.exist?(dir)

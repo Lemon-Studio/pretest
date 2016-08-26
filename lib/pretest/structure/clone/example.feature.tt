@@ -1,16 +1,18 @@
+<% if web_scaffold == 'true' -%>
 Feature: Google Validations
+
+  Background:
+  Given I am on "https://google.com.br"
 
   @tag1
   Scenario: Validate google search functions
-  Given I am on "https://google.com"
-  And I fill in "" with ""
-  When I press ":enter" button
-  Then I expect to find "" text
-
+  And I fill in "lst-ib" with "Qualidade de Software"
+  When I press "enter" button in "#lst-ib" field
+  Then I expect to find "Qualidade de software – Wikipédia, a enciclopédia livre" text
 
   @tag2
   Scenario: Validate google search functions using page object
-  Given I am on "https://google.com"
-  When I search for ""
-  And I click on first link
-  Then I expect to find "" text
+  When I search for "Qualidade de Software"
+  And I click on first link with text "Qualidade de software – Wikipédia"
+  Then I expect to find "A qualidade de software" text
+<% end -%>
