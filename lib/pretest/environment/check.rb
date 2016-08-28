@@ -29,7 +29,7 @@ module Pretest
         when mac?
           set_mac_env
         when windows?
-          Dir.mkdir("C:\\env_folder") unless Dir.glob("C:\\env_folder") != nil
+          Dir.mkdir("C:\\env_folder") unless Dir.entries("C:\\").include?("env_folder")
           Dir.chdir("C:\\env_folder")
           system 'setx PATH "%PATH%;C:\\env_folder"' unless ENV['PATH'].include?("C:\\env_folder")
           set_versions
