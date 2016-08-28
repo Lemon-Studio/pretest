@@ -3,6 +3,7 @@ require 'rest-client'
 require 'zip'
 require 'nokogiri'
 require 'open-uri'
+require 'fileutils'
 
 module Pretest
 
@@ -30,13 +31,14 @@ module Pretest
         when windows?
           Dir.mkdir("C:\\env_folder") unless Dir.glob("C:\\env_folder") != nil
           Dir.chdir("C:\\env_folder")
-          system 'setx PATH "%PATH%;C:\\env_folder"'
+          system 'setx PATH "%PATH%;C:\\env_folder"' unless ENV['PATH'].include?("C:\\env_folder")
           set_versions
           set_bits
           set_windows_env
           unzip_file("chromedriver_win32.zip", ".")
           unzip_file("phantomjs-#{@phantomjs_version}-windows.zip", ".")
-          system "copy phantomjs-#{@phantomjs_version}-windows\\bin\\phantomjs.exe C:\\env_folder"
+          FileUtils.mv("phantomjs-#{@phantomjs_version}-windows\\bin\\phantomjs.exe", "C:\\env_folder")
+          puts "Please reboot your CMD to load the new environment variables"
         end
       end
 
