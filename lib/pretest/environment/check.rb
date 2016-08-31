@@ -27,7 +27,6 @@ module Pretest
           Dir.mkdir("C:\\env_folder") unless Dir.entries("C:\\").include?("env_folder")
           Dir.chdir("C:\\env_folder")
           system 'setx PATH "%PATH%;C:\\env_folder"' unless ENV['PATH'].include?("C:\\env_folder")
-          set_versions
           set_bits
           set_windows_env
           unzip_file("chromedriver_win32.zip", ".")
