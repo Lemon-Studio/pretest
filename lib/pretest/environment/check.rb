@@ -1,7 +1,6 @@
 require 'thor/group'
 require 'rest-client'
 require 'zip'
-require 'nokogiri'
 require 'open-uri'
 require 'fileutils'
 
@@ -12,10 +11,6 @@ module Pretest
     class Check < Thor::Group
 
       include Thor::Actions
-
-      #argument :set_env, type: :string, desc: "Set environment variables with the actual OS"
-      #argument :check_env, type: :string, desc: "Check environment variables from the actual OS"
-      #argument :show_env, type: :string, desc: "Show environment variables from the actual OS"
 
       desc "Set, check and show environment variables from the actual Operational System"
 
@@ -36,8 +31,10 @@ module Pretest
           set_bits
           set_windows_env
           unzip_file("chromedriver_win32.zip", ".")
-          unzip_file("phantomjs-#{@phantomjs_version}-windows.zip", ".")
-          FileUtils.mv("phantomjs-#{@phantomjs_version}-windows\\bin\\phantomjs.exe", "C:\\env_folder")
+          unzip_file("phantomjs-2.1.1-windows.zip", ".")
+          unzip_file("IEDriverServer_Win32_2.53.1.zip", ".")
+          FileUtils.mv("phantomjs-2.1.1-windows\\bin\\phantomjs.exe", "C:\\env_folder")
+          dk_check_and_install
           puts "Please reboot your CMD to load the new environment variables"
         end
       end
@@ -45,8 +42,9 @@ module Pretest
       no_commands do
 
         def set_windows_env
-          windows_download("chromedriver_win32.zip", "http://chromedriver.storage.googleapis.com/#{@chrome_version}/chromedriver_win32.zip")
-          windows_download("phantomjs-#{@phantomjs_version}-windows.zip", "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-#{@phantomjs_version}-windows.zip")
+          windows_download("chromedriver_win32.zip", "http://chromedriver.storage.googleapis.com/2.23/chromedriver_win32.zip")
+          windows_download("phantomjs-2.1.1-windows.zip", "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip")
+          windows_download("IEDriverServer_Win32_2.53.1.zip", "https://selenium-release.storage.googleapis.com/2.53/IEDriverServer_Win32_2.53.1.zip")
         end
 
         def unzip_file(file, destination)
@@ -79,6 +77,35 @@ module Pretest
           end
         end
 
+        def dk_check_and_install
+          rbenv = ""
+          rbpath = ""
+          rblist = ""
+          rbenv += ENV['PATH']
+          rbenv = rbenv.split(";")
+          rbenv.each {|rb| if rb.include?("Ruby")
+                      rbpath = rb
+                      end }
+          rbpath = rbpath.gsub!("bin", "lib\\ruby\\site_ruby\\")
+          Dir.entries(rbpath).each {|files| rblist << files.to_s}
+          if rblist.include?("devkit")
+          else
+            windows_download("DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe", "http://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe")
+            unzip_install_dk("DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe")
+          end
+        end
+
+        def unzip_install_dk(file)
+          Dir.chdir("C:\\env_folder")
+          Dir.mkdir("devkit")
+          FileUtils.mv("#{file}", "C:\\env_folder\\devkit\\")
+          Dir.chdir("devkit")
+          system "#{file} -o '.' -y"
+          system "del #{file}"
+          system "ruby dk.rb init"
+          system "ruby dk.rb install"
+        end
+
         def set_mac_env
          system "which -s brew
          if [[ $? != 0  ]] ; then
@@ -88,10 +115,11 @@ module Pretest
          fi"
          system "brew install phantomjs"
          system "brew install chromedriver"
+         system "xcode-select --install"
         end
 
         def set_linux_chromedriver
-          system "sudo wget -N http://chromedriver.storage.googleapis.com/#{@chrome_version}/chromedriver_linux#{@bits}.zip"
+          system "sudo wget -N http://chromedriver.storage.googleapis.com/2.23/chromedriver_linux#{@bits}.zip"
           system "sudo unzip chromedriver_linux#{@bits}.zip"
           system "sudo chmod +x chromedriver"
           system "sudo mv -f chromedriver /usr/local/share/chromedriver"
@@ -101,21 +129,13 @@ module Pretest
         end
 
         def set_linux_phantomjs
-          system "sudo wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}.tar.bz2"
-          system "sudo tar xvjf phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}.tar.bz2"
-          system "sudo mv -f phantomjs-#{@phantomjs_version}-#{@phantomjs_bits} /usr/local/share/phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}"
-          system "sudo ln -s /usr/local/share/phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}/bin/phantomjs /usr/local/share/phantomjs"
-          system "sudo ln -s /usr/local/share/phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}/bin/phantomjs /usr/local/bin/phantomjs"
-          system "sudo ln -s /usr/local/share/phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}/bin/phantomjs /usr/bin/phantomjs"
-          system "sudo rm -rf phantomjs-#{@phantomjs_version}-#{@phantomjs_bits}.tar.bz2"
-        end
-
-        def set_versions
-          chrome_release = Nokogiri::HTML(open("http://chromedriver.storage.googleapis.com/LATEST_RELEASE"))
-          @chrome_version = chrome_release.text
-          phantomjs_release = Nokogiri::HTML(open("http://phantomjs.org/download.html"))
-          pre_version = phantomjs_release.css('div p a')[0].text
-          @phantomjs_version = pre_version[10..14]
+          system "sudo wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-#{@phantomjs_bits}.tar.bz2"
+          system "sudo tar xvjf phantomjs-2.1.1-#{@phantomjs_bits}.tar.bz2"
+          system "sudo mv -f phantomjs-2.1.1-#{@phantomjs_bits} /usr/local/share/phantomjs-2.1.1-#{@phantomjs_bits}"
+          system "sudo ln -s /usr/local/share/phantomjs-2.1.1-#{@phantomjs_bits}/bin/phantomjs /usr/local/share/phantomjs"
+          system "sudo ln -s /usr/local/share/phantomjs-2.1.1-#{@phantomjs_bits}/bin/phantomjs /usr/local/bin/phantomjs"
+          system "sudo ln -s /usr/local/share/phantomjs-2.1.1-#{@phantomjs_bits}/bin/phantomjs /usr/bin/phantomjs"
+          system "sudo rm -rf phantomjs-2.1.1-#{@phantomjs_bits}.tar.bz2"
         end
 
         def set_bits

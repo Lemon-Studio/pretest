@@ -26,5 +26,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'thor', '~> 0'
   spec.add_runtime_dependency 'rubyzip'
   spec.add_runtime_dependency 'rest-client'
-  spec.add_runtime_dependency 'nokogiri'
 end
