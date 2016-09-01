@@ -17,7 +17,6 @@ module Pretest
       def raise_env
         case true #unless check_env == 'true' or show_env == 'true'
         when linux?
-          set_versions
           set_bits
           set_linux_chromedriver
           set_linux_phantomjs
@@ -29,9 +28,7 @@ module Pretest
           system 'setx PATH "%PATH%;C:\\env_folder"' unless ENV['PATH'].include?("C:\\env_folder")
           set_bits
           set_windows_env
-          unzip_file("chromedriver_win32.zip", ".")
-          unzip_file("phantomjs-2.1.1-windows.zip", ".")
-          unzip_file("IEDriverServer_Win32_2.53.1.zip", ".")
+          unzip_windows_files
           FileUtils.mv("phantomjs-2.1.1-windows\\bin\\phantomjs.exe", "C:\\env_folder")
           dk_check_and_install
           puts "Please reboot your CMD to load the new environment variables"
@@ -40,10 +37,16 @@ module Pretest
 
       no_commands do
 
+        def unzip_windows_files
+          unzip_file("chromedriver_win32.zip", ".") unless Dir.entries(".").include?("chromedriver.exe")
+          unzip_file("phantomjs-2.1.1-windows.zip", ".") unless Dir.entries(".").include?("phantomjs.exe") or File.directory("phantomjs-2.1.1-windows")
+          unzip_file("IEDriverServer_Win32_2.53.1.zip", ".") unless Dir.entries(".").include?("IEDriverServer.exe")
+        end
+
         def set_windows_env
-          windows_download("chromedriver_win32.zip", "http://chromedriver.storage.googleapis.com/2.23/chromedriver_win32.zip")
-          windows_download("phantomjs-2.1.1-windows.zip", "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip")
-          windows_download("IEDriverServer_Win32_2.53.1.zip", "https://selenium-release.storage.googleapis.com/2.53/IEDriverServer_Win32_2.53.1.zip")
+          windows_download("chromedriver_win32.zip", "http://chromedriver.storage.googleapis.com/2.23/chromedriver_win32.zip") unless Dir.entries(".").include?("chromedriver_win32.zip") or Dir.entries(".").include?("chrome.exe")
+          windows_download("phantomjs-2.1.1-windows.zip", "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip") unless Dir.entries(".").include?("phantomjs-2.1.1-windows.zip") or Dir.entries(".").include?("phantomjs.exe")
+          windows_download("IEDriverServer_Win32_2.53.1.zip", "https://selenium-release.storage.googleapis.com/2.53/IEDriverServer_Win32_2.53.1.zip") unless Dir.entries(".").include?("IEDriverServer_Win32_2.53.1.zip") or Dir.entries(".").include?("IEDriverServer.exe")
         end
 
         def unzip_file(file, destination)
