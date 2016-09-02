@@ -1,19 +1,19 @@
 
 <h1>Pretest</h1>
 
+<h2>Requirements</h2>
+
+<p>
+Your unique requirement is the Ruby installed in your machine (we recommend ruby 32 bits version if you're using windows, and at least Windows 7 or a newer version) and the browsers that you want to use in your web automation (except for the phantomjs, that is installed automatically if the command "pretest environment" is used).
+If you're having problems with firefox, we recommend to use the version 47.0.1 (https://ftp.mozilla.org/pub/firefox/releases/) due to issues with webdriver on newer versions.
+</p>
+
 <h2>Installation</h2>
 
     gem install pretest
 
 <p>
 Pretest is a gem to help you to start your automation project. With pretest you can start and configure your environment for web and mobile automation projects with just a few commands.
-</p>
-
-<h2>And how do i do this?</h2>
-
-<p>
-It's easy, the unique requirement is the Ruby installed in your machine (we recommend ruby 32 bits version if you're using windows, and at least Windows 7 or a newer version) and the browsers that you want to use in your web automation (except for the phantomjs, that is installed automatically if the command "pretest environment" is used).
-If you're having problems with firefox, we recommend to use the version 47.0.1 (https://ftp.mozilla.org/pub/firefox/releases/) due to issues with webdriver on newer versions.
 </p>
 
 <h2>And how do i do this?</h2>
