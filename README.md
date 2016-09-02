@@ -13,7 +13,7 @@ If you're having problems with firefox, we recommend to use the version 47.0.1 (
     gem install pretest
 
 <p>
-Pretest is a gem to help you to start your automation projects. With pretest you can start and configure your environment for web and mobile automation projects with just a few commands.
+Pretest is a gem that helps you to start your automation projects. With pretest you can start and configure your environment for web and mobile automation projects with just a few commands.
 </p>
 
 <h2>And how do i do this?</h2>
