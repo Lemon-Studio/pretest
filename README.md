@@ -62,11 +62,11 @@ We have commands to create a new project structure, and a new project scaffold w
 </p>
 
 <p>
-<strong>pretest create project_name --ios_scaffold:</strong> This command is used to create a new project for ios-calabash automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
+<strong>pretest create project_name --ios_scaffold (not released yet!)</strong> This command is used to create a new project for ios-calabash automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
 </p>
 
 <p>
-<strong>pretest create project_name --android_scaffold:</strong> This command is used to create a new project for android-calabash automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
+<strong>pretest create project_name --android_scaffold (not released yet!)</strong> This command is used to create a new project for android-calabash automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
 </p>
 
 ## Contributing
