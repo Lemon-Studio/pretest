@@ -23,7 +23,7 @@ It's simple, for this we have some commands that can configure your environment 
 We have commands to create a new project structure, and a new project scaffold with examples of steps/features/and pages already created, that you can use to start to learn and create your own projects.
 </p>
 
-<h3>Commands</h3>
+<h2>Commands</h2>
 
 <ul>
 <li>pretest help</li>
@@ -36,7 +36,7 @@ We have commands to create a new project structure, and a new project scaffold w
 <li>pretest create project_name --android_scaffold<strong>(Soon)</strong></li>
 </ul>
 
-<h3>Usage</h3>
+<h2>Usage</h2>
 
 <p>
 <strong>pretest help:</strong> This command is used to list all the actual commands released in pretest
