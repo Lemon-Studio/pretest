@@ -6,13 +6,13 @@ require 'pretest/version'
 Gem::Specification.new do |spec|
   spec.name          = "pretest"
   spec.version       = Pretest::VERSION
-  spec.authors       = ["Lucas Machado"]
-  spec.email         = ["lucas.dpmachado@gmail.com"]
+  spec.authors       = ['Lucas Machado', 'Murilo Machado']
+  spec.email         = ['lucas.dpmachado@gmail.com', 'murilo.paula.machado@gmail.com']
 
-  spec.summary       = "Cucumber web project creator"
+  spec.summary       = "Cucumber web, desktop and mobile project creator"
   spec.description   = "A gem that creates a cucumber project structure"
   spec.homepage      = "https://github.com/machado144/pretest"
-  spec.license       = "MIT"
+  spec.license       = "GNU AGPL3.0"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "bin"
