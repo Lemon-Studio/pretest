@@ -3,23 +3,39 @@ Given(/^I am on "([^"]*)"$/) do |site|
   visit(site)
 end
 
-Given(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+Given(/^I click on "([^"]*)" button$/) do |btn|
+  click_button(btn)
+end
+
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, select_box|
+  select(option, from: select_box)
+end
+
+When(/^I check "([^"]*)" in check box$/) do |check|
+  check(check)
+end
+
+When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
 
-When(/^I press "([^"]*)" button in "([^"]*)" field$/) do |key, field|
-  find(field).native.send_keys(key.to_sym)
+Then(/^I expect to not see "([^"]*)"$/) do |css|
+ assert_no_selector(css)
 end
 
-Then(/^I expect to find "([^"]*)" text$/) do |txt|
-  assert_text(txt, wait: 10)
+Given(/^I click on each button$/) do
+  Example.new.buttons_click
 end
 
-When(/^I search for "([^"]*)"$/) do |val|
-  Example.new.google_search(val)
+When(/^I check each check box$/) do
+  Example.new.all_check_box
 end
 
-When(/^I click on first link with text "([^"]*)"$/) do |txt|
-  first("a", text: txt, wait: 5).click
+When(/^I fill in all fields$/) do
+  Example.new.fill_each_fields
+end
+
+Then(/^I expect to not see buttons in buttons panel$/) do
+  Example.new.has_no_buttons
 end
 <% end -%>

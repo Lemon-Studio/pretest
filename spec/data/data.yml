@@ -21,22 +21,26 @@ gemfile:
 
 features:
   features_web: |
-                 Feature: Google Validations
+                 Feature: Validate Vilas Boas IT Tests page.
 
                    Background:
-                   Given I am on "https://google.com.br"
+                   Given I am on "http://vilasboasit.com/tests.html"
 
-                   @tag1
-                   Scenario: Validate google search functions
-                   And I fill in "lst-ib" with "Qualidade de Software"
-                   When I press "enter" button in "#lst-ib" field
-                   Then I expect to find "Qualidade de software – Wikipédia, a enciclopédia livre" text
+                   @tag @tag1
+                   Scenario: Check buttons, select box, checkbox, and fields in current page
+                   And I click on "btn_one" button
+                   When I select "ExampleOne" from "select_box"
+                   And I check "opt_one" in check box
+                   And I fill in "first_name" with "Test"
+                   Then I expect to not see "#btn_one"
 
-                   @tag2
-                   Scenario: Validate google search functions using page object
-                   When I search for "Qualidade de Software"
-                   And I click on first link with text "Qualidade de software – Wikipédia"
-                   Then I expect to find "A qualidade de software" text
+                   @tag @tag2
+                   Scenario: Check each buttons, select box, checkbox, and fields in current page
+                   And I click on each button
+                   When I select "ExampleOne" from "select_box"
+                   And I check each check box
+                   And I fill in all fields
+                   Then I expect to not see buttons in buttons panel
 
   step_definitions:
     steps_web: |
@@ -44,24 +48,40 @@ features:
                   visit(site)
                 end
 
-                Given(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+                Given(/^I click on "([^"]*)" button$/) do |btn|
+                  click_button(btn)
+                end
+
+                When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, select_box|
+                  select(option, from: select_box)
+                end
+
+                When(/^I check "([^"]*)" in check box$/) do |check|
+                  check(check)
+                end
+
+                When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
                   fill_in(field, with: value)
                 end
 
-                When(/^I press "([^"]*)" button in "([^"]*)" field$/) do |key, field|
-                  find(field).native.send_keys(key.to_sym)
+                Then(/^I expect to not see "([^"]*)"$/) do |css|
+                 assert_no_selector(css)
                 end
 
-                Then(/^I expect to find "([^"]*)" text$/) do |txt|
-                  assert_text(txt, wait: 10)
+                Given(/^I click on each button$/) do
+                  Example.new.buttons_click
                 end
 
-                When(/^I search for "([^"]*)"$/) do |val|
-                  Example.new.google_search(val)
+                When(/^I check each check box$/) do
+                  Example.new.all_check_box
                 end
 
-                When(/^I click on first link with text "([^"]*)"$/) do |txt|
-                  first("a", text: txt, wait: 5).click
+                When(/^I fill in all fields$/) do
+                  Example.new.fill_each_fields
+                end
+
+                Then(/^I expect to not see buttons in buttons panel$/) do
+                  Example.new.has_no_buttons
                 end
 
   support:
@@ -107,9 +127,34 @@ features:
 
                     include Capybara::DSL
 
-                    def google_search(value)
-                      fill_in("lst-ib", with: value)
-                      click_on("Pesquisar")
+                    def buttons_click
+                      click_button("btn_one")
+                      click_button("btn_two")
+                      click_button("btn_three")
+                      click_button("btn_link")
+                    end
+
+                    def all_check_box
+                      check("opt_one")
+                      check("opt_two")
+                      check("opt_three")
+                    end
+
+                    def fill_each_fields
+                      fill_in("first_name", with: "FirstTeste")
+                      fill_in("mid_name", with: "MidTeste")
+                      fill_in("last_name", with: "LastTeste")
+                      fill_in("age", with: "20")
+                      fill_in("email", with: "teste@testmail.com")
+                      fill_in("job", with: "QA")
+                      fill_in("gender", with: "undefined")
+                    end
+
+                    def has_no_buttons
+                      assert_no_selector("#btn_one")
+                      assert_no_selector("#btn_two")
+                      assert_no_selector("#btn_three")
+                      assert_no_selector("#btn_link")
                     end
 
                   end
