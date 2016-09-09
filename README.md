@@ -1,10 +1,15 @@
 
 <h1>Pretest</h1>
 
+<p>
+Pretest is a gem that helps you to start your automation projects. With pretest you can start and configure your environment for web and mobile automation projects with just a few commands.
+</p>
+
 <h2>Requirements</h2>
 
 <p>
-Your unique requirement is the Ruby installed in your machine (we recommend ruby 32 bits version if you're using windows, and at least Windows 7 or a newer version) and the browsers that you want to use in your web automation (except for the phantomjs, that is installed automatically if the command "pretest environment" is used).
+Ruby installed in your machine (we recommend ruby 32 bits version if you're using Windows, and at least Windows 7 or a newer version) and the browsers that you want to use in your web automation (except for the phantomjs, that is installed automatically if the command "pretest environment" is used).
+
 If you're having problems with firefox, we recommend to use the version 47.0.1 (https://ftp.mozilla.org/pub/firefox/releases/) due to issues with webdriver on newer versions.
 </p>
 
@@ -12,21 +17,18 @@ If you're having problems with firefox, we recommend to use the version 47.0.1 (
 
     gem install pretest
 
-<p>
-Pretest is a gem that helps you to start your automation projects. With pretest you can start and configure your environment for web and mobile automation projects with just a few commands.
-</p>
-
-<h2>And how do i do this?</h2>
+<h2>How to use</h2>
 
 <p>
-It's simple, for this we have some commands that can configure your environment for tests with chromedriver/phantomjs/IEDriverServer, and then its created a new folder that can be used to store others webdriver that you can use for your automations projects.
-We have commands to create a new project structure, and a new project scaffold with examples of steps/features/and pages already created, that you can use to start to learn and create your own projects.
+For this we have some commands that can configure your environment for tests with chromedriver / phantomjs / IEDriverServer, and then its created a new folder that can be used to store others Webdriver's that you can use for your automations projects.
+We have commands to create a new project structure, and a new project scaffold with examples of steps / features / and pages already created, that you can use to start to learn and create your own projects.
 </p>
 
 <h2>Commands</h2>
 
 <ul>
-<li>pretest help</li>
+<li>pretest</li>
+<li>pretest help [COMMAND]</li>
 <li>pretest environment</li>
 <li>pretest create project_name</li>
 <li>pretest create project_name --web_scaffold</li>
@@ -39,7 +41,11 @@ We have commands to create a new project structure, and a new project scaffold w
 <h2>Usage</h2>
 
 <p>
-<strong>pretest help:</strong> This command is used to list all the actual commands released in pretest
+<strong>pretest:</strong> This command is used to list all the actual commands released in pretest
+</p>
+
+<p>
+<strong>pretest help [COMMAND]:</strong> This command is used to list the actual command options (example: "pretest help create")
 </p>
 
 <p>
@@ -54,26 +60,10 @@ We have commands to create a new project structure, and a new project scaffold w
 <strong>pretest create project_name --web_scaffold:</strong> This command is used to create a new project for web automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
 </p>
 
-<strong>pretest create project_name --ios (not released yet!)</strong> This command is used to create a new project for ios-calabash automation with all the structure already created and environment configured.
-</p>
-
-<p>
-<strong>pretest create project_name --android (not released yet!)</strong> This command is used to create a new project for android-calabash automation with all the structure already created and environment configured.
-</p>
-
-<p>
-<strong>pretest create project_name --ios_scaffold (not released yet!)</strong> This command is used to create a new project for ios-calabash automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
-</p>
-
-<p>
-<strong>pretest create project_name --android_scaffold (not released yet!)</strong> This command is used to create a new project for android-calabash automation with all the structure already created and environment configured, including some steps, features and pages with examples that can be used to develop new tests cases.
-</p>
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/machado144/pretest.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+The code licensed here under the GNU Affero General Public License, version 3 AGPL-3.0. [GNU AGPL 3.0 License](https://github.com/machado144/pretest/blob/master/LICENSE.txt). Pretest has been developed by the VilasBoasIT team (Lucas Machado and Murilo Machado), as detailed in [VilasBoasIT Website](http://www.vilasboasit.com).

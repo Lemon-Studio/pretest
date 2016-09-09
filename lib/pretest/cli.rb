@@ -19,15 +19,9 @@ module Pretest
       Pretest::Structure::Clone.start([name, web, ios, android, web_scaffold])
     end
 
-    desc "environment <OPTION>", "There is three options that we can use: set_env, check_env and show_env"
-    #method_option :set_env, type: :boolean, desc: "Set environment variables with the actual OS"
-    #method_option :check_env, type: :boolean, desc: "Check environment variables in actual OS"
-    #method_option :show_env, type: :boolean, desc: "Show environment variables from actual OS"
+    desc "environment <OPTION>", "Check, configure, and install environment variables and webdrivers in the current OS"
 
     def environment
-      #set_env = options[:set_env]
-      #check_env = options[:check_env]
-      #show_env = options[:show_env]
       Pretest::Environment::Check.start
     end
 
