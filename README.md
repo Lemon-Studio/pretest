@@ -5,6 +5,8 @@
 Pretest is a gem that helps you to start your automation projects. With pretest you can start and configure your environment for web and mobile automation projects with just a few commands.
 </p>
 
+[![Gem Version](https://badge.fury.io/rb/pretest@2x.png)](https://badge.fury.io/rb/pretest)
+
 <h2>Requirements</h2>
 
 <p>
