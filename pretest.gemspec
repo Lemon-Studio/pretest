@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Cucumber web, desktop and mobile project creator"
   spec.description   = "A gem that creates a cucumber project structure"
-  spec.homepage      = "https://github.com/machado144/pretest"
+  spec.homepage      = "https://github.com/VilasBoasIT/pretest"
   spec.license       = "GNU AGPL3.0"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
