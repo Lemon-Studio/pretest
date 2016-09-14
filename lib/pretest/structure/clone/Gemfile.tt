@@ -1,11 +1,21 @@
+<% if clean_install == 'false' -%>
 source 'https://rubygems.org'
+gem 'selenium-webdriver'
+gem 'cucumber'
+gem 'page-object'
+gem 'rspec'
+gem 'capybara'
+gem 'rake'
 gem 'chromedriver-helper'
 gem 'pry'
 gem 'faker'
-gem 'capybara'
-gem 'cucumber'
-gem 'rspec'
-gem 'rake'
-gem 'selenium-webdriver'
 gem 'poltergeist'
+<% end -%>
+<% if clean_install == 'true' -%>
+source 'https://rubygems.org'
+gem 'selenium-webdriver'
+gem 'cucumber'
 gem 'page-object'
+gem 'rspec'
+gem 'capybara'
+<% end -%>

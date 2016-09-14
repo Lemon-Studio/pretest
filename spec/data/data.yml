@@ -2,6 +2,13 @@ cucumber: |
            default: --no-source --color --format pretty
 
 gemfile:
+  clean:    |
+             source 'https://rubygems.org'
+             gem 'selenium-webdriver'
+             gem 'cucumber'
+             gem 'page-object'
+             gem 'rspec'
+             gem 'capybara'
   web:      |
              source 'https://rubygems.org'
              gem 'chromedriver-helper'
@@ -85,6 +92,12 @@ features:
                 end
 
   support:
+    env_clean: |
+                require 'rspec'
+                require 'page-object'
+                require 'capybara/cucumber'
+
+                Capybara.default_driver = :selenium
     env_web: |
               require 'rspec'
               require 'page-object'

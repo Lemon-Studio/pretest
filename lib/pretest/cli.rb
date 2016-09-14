@@ -10,16 +10,18 @@ module Pretest
     method_option :ios, type: :boolean, desc: "Create a iOS Mobile Automation Project Structure"
     method_option :android, type: :boolean, desc: "Create a Android Mobile Automation Project Structure"
     method_option :web_scaffold, type: :boolean, desc: "Creates a Web Automation Project Structure with some steps, pages and features already created"
+    method_option :clean_install, type: :boolean, desc: "Creates a Clean Web Automation Project Structure"
 
     def create(name)
       web = options[:web] ? 'true' : 'false'
       ios = options[:ios] ? 'true' : 'false'
       android = options[:android] ? 'true' : 'false'
       web_scaffold = options[:web_scaffold] ? 'true' : 'false'
-      Pretest::Structure::Clone.start([name, web, ios, android, web_scaffold])
+      clean_install = options[:clean_install] ? 'true' : 'false'
+      Pretest::Structure::Clone.start([name, web, ios, android, web_scaffold, clean_install])
     end
 
-    desc "environment <OPTION>", "Check, configure, and install environment variables and webdrivers in the current OS"
+    desc "environment", "Check, configure, and install environment variables and webdrivers in the current OS"
 
     def environment
       Pretest::Environment::Check.start

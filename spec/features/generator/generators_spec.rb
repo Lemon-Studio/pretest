@@ -29,6 +29,18 @@ describe Pretest do
     expect(Dir.entries(".")).not_to include("#{folder} name")
   end
 
+  it 'creates a new project with clean_install and check his content' do
+    folder = "pretest_spec"
+    system "pretest create #{folder} --clean_install"
+
+    expect(File.read("#{folder}/Gemfile").strip).to include(CONFIG_DATA['gemfile']['clean'].strip)
+    expect(File.read("#{folder}/features/support/env.rb").strip).to include(CONFIG_DATA['features']['support']['env_clean'].strip)
+    expect(File.read("#{folder}/cucumber.yml").strip).to include(CONFIG_DATA['cucumber'].strip)
+    expect(File.read("#{folder}/features/support/pages/example.rb").strip).not_to include(CONFIG_DATA['features']['support']['pages']['pages_web'].strip)
+    expect(File.read("#{folder}/features/example.feature").strip).not_to include(CONFIG_DATA['features']['features_web'].strip)
+    expect(File.read("#{folder}/features/step_definitions/step_definitions.rb").strip).not_to include(CONFIG_DATA['features']['step_definitions']['steps_web'].strip)
+  end
+
   it 'creates a new project and check his content' do
     folder = "pretest_spec"
     system "pretest create #{folder}"

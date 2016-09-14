@@ -19,11 +19,12 @@ Gem::Specification.new do |spec|
   spec.executables   = "pretest"
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.12"
+  spec.add_development_dependency "bundler", "~> 1.13.1"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 
   spec.add_runtime_dependency 'thor', '~> 0'
+  spec.add_runtime_dependency 'bundler', '~> 1.13.1'
   spec.add_runtime_dependency 'rubyzip'
   spec.add_runtime_dependency 'rest-client'
 end
