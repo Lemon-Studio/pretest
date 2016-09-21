@@ -11,21 +11,16 @@ gemfile:
              gem 'capybara'
   web:      |
              source 'https://rubygems.org'
+             gem 'selenium-webdriver'
+             gem 'cucumber'
+             gem 'page-object'
+             gem 'rspec'
+             gem 'capybara'
+             gem 'rake'
              gem 'chromedriver-helper'
              gem 'pry'
              gem 'faker'
-             gem 'capybara'
-             gem 'cucumber'
-             gem 'rspec'
-             gem 'rake'
-             gem 'selenium-webdriver'
              gem 'poltergeist'
-             gem 'page-object'
-
-  ios:      |
-
-  android:  |
-
 features:
   features_web: |
                  Feature: Validate Vilas Boas IT Tests page.
@@ -101,8 +96,8 @@ features:
     env_web: |
               require 'rspec'
               require 'page-object'
-              require 'faker'
               require 'capybara/cucumber'
+              require 'faker'
               require 'pry'
               require 'capybara/poltergeist'
 
