@@ -13,7 +13,7 @@ describe Pretest do
 
   it 'creates a new empty project' do
     folder = "pretest_spec"
-    system "pretest create #{folder}"
+    system "pretest create #{folder} --no_bundle"
 
     expect(Dir.entries(folder)).to include("cucumber.yml", "data", "features", "Gemfile")
     expect(Dir.entries("#{folder}/features")).to include("example.feature", "step_definitions", "support")
@@ -43,7 +43,7 @@ describe Pretest do
 
   it 'creates a new project and check his content' do
     folder = "pretest_spec"
-    system "pretest create #{folder}"
+    system "pretest create #{folder} --no_bundle"
 
     expect(File.read("#{folder}/Gemfile").strip).to include(CONFIG_DATA['gemfile']['web'].strip)
     expect(File.read("#{folder}/features/support/env.rb").strip).to include(CONFIG_DATA['features']['support']['env_web'].strip)
@@ -55,7 +55,7 @@ describe Pretest do
 
   it 'creates a new project with web_scaffold and check his content' do
     folder = "pretest_spec"
-    system "pretest create #{folder} --web_scaffold"
+    system "pretest create #{folder} --web_scaffold --no_bundle"
 
     expect(File.read("#{folder}/cucumber.yml").strip).to include(CONFIG_DATA['cucumber'].strip)
     expect(File.read("#{folder}/Gemfile").strip).to include(CONFIG_DATA['gemfile']['web'].strip)
