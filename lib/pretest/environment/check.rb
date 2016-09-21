@@ -25,7 +25,7 @@ module Pretest
         when windows?
           Dir.mkdir("C:\\env_folder") unless Dir.entries("C:\\").include?("env_folder")
           Dir.chdir("C:\\env_folder")
-          system 'setx PATH "%PATH%;C:\\env_folder"' unless ENV['PATH'].include?("C:\\env_folder")
+          system 'setx PATH "%PATH%;C:\\env_folder;C:\\Program Files\\Mozilla Firefox;C:\\Program Files (x86)\\Mozilla Firefox"' unless ENV['PATH'].include?("C:\\env_folder") and ENV['PATH'].include?("C:\\Program Files\\Mozilla Firefox") and ENV['PATH'].include?("C:\\Program Files (x86)\\Mozilla Firefox")
           set_bits
           set_windows_env
           unzip_windows_files
@@ -64,8 +64,8 @@ module Pretest
           zipfile = url
           resource = RestClient::Resource.new(
               zipfile,
-              :timeout => 10,
-              :open_timeout => 10
+              :timeout => 60,
+              :open_timeout => 60
           )
           response = resource.get
           if response.code == 200
@@ -84,6 +84,9 @@ module Pretest
           rbpath = ""
           rblist = ""
           rbenv += ENV['PATH']
+          if ENV['PATH'].include?("Ruby") == false
+            raise "There is no Ruby environment variable defined in current PATH"
+          end
           rbenv = rbenv.split(";")
           rbenv.each {|rb| if rb.include?("Ruby")
                       rbpath = rb
