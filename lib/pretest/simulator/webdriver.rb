@@ -2,7 +2,7 @@
 #require 'capybara/dsl'
 #require 'pry'
 #require 'capybara/poltergeist'
-
+=begin
 module Pretest
   module WebDriver
     class Simulate < Thor::Group
@@ -36,3 +36,4 @@ module Pretest
     end
   end
 end
+=end
