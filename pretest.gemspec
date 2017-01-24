@@ -27,8 +27,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'bundler', '~> 1.13.1'
   spec.add_runtime_dependency 'rubyzip'
   spec.add_runtime_dependency 'rest-client'
-  spec.add_runtime_dependency 'pry'
-  spec.add_runtime_dependency 'poltergeist'
-  spec.add_runtime_dependency 'capybara'
-  spec.add_runtime_dependency 'selenium-webdriver'
 end
