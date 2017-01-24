@@ -1,1 +1,3 @@
+<% if web == 'true' || ( ios == 'false' && android == 'false' ) -%>
 require 'selenium-webdriver'
+<% end -%>

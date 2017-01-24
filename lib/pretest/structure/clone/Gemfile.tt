@@ -1,4 +1,4 @@
-<% if clean_install == 'false' -%>
+<% if web == 'true' || ( ios == 'false' && android == 'false' ) -%>
 source 'https://rubygems.org'
 gem 'selenium-webdriver'
 gem 'cucumber'
@@ -18,4 +18,17 @@ gem 'cucumber'
 gem 'page-object'
 gem 'rspec'
 gem 'capybara'
+<% end -%>
+<% if ios == 'true' -%>
+source "https://rubygems.org"
+
+gem "calabash-cucumber", '0.20.3'
+gem "pry"
+<% end -%>
+<% if android == 'true' -%>
+source "https://rubygems.org"
+
+gem 'calabash-cucumber', '0.20.3'
+gem 'calabash-android', '0.8.4'
+gem 'pry'
 <% end -%>

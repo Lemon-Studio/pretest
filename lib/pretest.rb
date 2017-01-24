@@ -1,2 +1,2 @@
-require "pretest/version"
+require 'pretest/version'
 require 'pretest/cli'
