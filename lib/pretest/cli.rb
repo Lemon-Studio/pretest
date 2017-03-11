@@ -21,6 +21,8 @@ module Pretest
       web_scaffold = options[:web_scaffold] ? 'true' : 'false'
       clean_install = options[:clean_install] ? 'true' : 'false'
       no_bundle = options[:no_bundle] ? 'true' : 'false'
+      ios = options[:ios] ? 'true' : 'false'
+      android = options[:android] ? 'true' : 'false'
       Pretest::Structure::Clone.start([name, web, ios, android, web_scaffold, clean_install, no_bundle])
     end
 
