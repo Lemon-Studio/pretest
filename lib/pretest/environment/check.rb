@@ -121,11 +121,11 @@ module Pretest
         end
 
         def mac_gecko_installer
-          system 'curl -OL https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-macos.tar.gz'
-          system 'sudo tar xvjf geckodriver-v0.14.0-macos.tar.gz'
+          system 'curl -OL https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-macos.tar.gz'
+          system 'sudo tar xvjf geckodriver-v0.15.0-macos.tar.gz'
           system 'sudo chmod +x geckodriver'
           system 'sudo mv -f geckodriver /usr/local/share/geckodriver'
-          system 'sudo rm -rf geckodriver-v0.14.0-macos.tar.gz'
+          system 'sudo rm -rf geckodriver-v0.15.0-macos.tar.gz'
           check_gecko_environment_variables
         end
 
