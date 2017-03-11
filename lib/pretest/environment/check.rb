@@ -134,13 +134,13 @@ module Pretest
           File.new("#{ENV['HOME']}/.pretest", 'w') unless Dir.entries(ENV['HOME']).include?('.pretest')
           if File.read("#{ENV['HOME']}/.pretest").include?('GECKO_DRIVER')
             puts 'GeckoDriver Home is already defined'
+            File.open("#{ENV['HOME']}/.bash_profile", 'a') { |file| file << @set_source } unless File.read("#{ENV['HOME']}/.bash_profile").include?('.pretest')
           else
             File.open("#{ENV['HOME']}/.pretest", 'a') { |file| file << @gecko_driver }
             File.open("#{ENV['HOME']}/.bash_profile", 'a') { |file| file << @set_source }
             system 'source ~/.bash_profile'
             puts 'GeckoDriver defined with success'
           end
-          system 'source ~/.pretest'
         end
 
         def set_gecko_env_variables
