@@ -1,0 +1,33 @@
+AllCops:
+    TargetRubyVersion: 2.3
+    #Exclude:
+Style/FrozenStringLiteralComment:
+    Enabled: false
+Metrics/BlockNesting:
+    Enabled: false
+Lint/EmptyWhen:
+    Enabled: false
+Style/AccessorMethodName:
+    Enabled: false
+Style/GlobalVars:
+    Enabled: false
+Lint/Eval:
+    Enabled: false
+Style/GuardClause:
+    Enabled: false
+Metrics/PerceivedComplexity:
+    Enabled: false
+Metrics/CyclomaticComplexity:
+    Enabled: false
+Style/Documentation:
+    Enabled: false
+Metrics/ClassLength:
+    Max: 350
+Metrics/LineLength:
+    Max: 400
+Metrics/MethodLength:
+    Max: 200
+Metrics/AbcSize:
+    Max: 300
+Metrics/BlockLength:
+    Max: 50

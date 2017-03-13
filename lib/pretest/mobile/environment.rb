@@ -2,7 +2,6 @@ require 'thor/group'
 require 'rest-client'
 require 'open-uri'
 require 'fileutils'
-require 'pry'
 
 module Pretest
   module Mobile
@@ -14,10 +13,9 @@ module Pretest
       desc 'Check, configure and install environment with de defined argument'
 
       def set_mobile_environment
-        case true # unless check_env == 'true' or show_env == 'true'
-        when linux? || mac?
+        if linux? || mac?
           mobile_env
-        when windows?
+        elsif windows?
         end
       end
 
@@ -77,7 +75,7 @@ export PATH='${PATH}:${ANDROID_HOME}/tools'".tr!("'", '"')
         def linux?
           unix? && !mac?
         end
-      end
-    end
-  end
-end
+      end # no_commands
+    end # class Environment/Thor::Group
+  end # module Mobile
+end # module Pretest

@@ -2,7 +2,6 @@ require 'thor'
 require 'pretest/structure/clone'
 require 'pretest/environment/check'
 require 'pretest/mobile/environment'
-# require 'pretest/simulator/webdriver'
 
 module Pretest
   class StructureGenerator < Thor

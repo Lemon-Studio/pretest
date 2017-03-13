@@ -15,7 +15,6 @@ gem 'poltergeist'
 source 'https://rubygems.org'
 gem 'selenium-webdriver'
 gem 'cucumber'
-gem 'page-object'
 gem 'rspec'
 gem 'capybara'
 <% end -%>
