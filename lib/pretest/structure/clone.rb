@@ -11,7 +11,6 @@ module Pretest
       argument :android, type: :string, desc: 'Set Project Structure to Android Mobile Automation'
       argument :web_scaffold, type: :string, desc: 'Set Project Structure to Web Automation and Creates some examples'
       argument :clean_install, type: :string, desc: 'Set a Clean Project Structure to Web Automation'
-      argument :no_bundle, type: :string, desc: 'Set bundle install config to turned off'
 
       desc 'Creates a new project for tests with Cucumber'
 
@@ -67,10 +66,6 @@ module Pretest
 
       def page_clone
         template 'example.rb.tt', "#{name}/features/support/pages/example.rb"
-      end
-
-      def bundle_install
-        system 'bundle install --gemfile=Gemfile' unless (clean_install == 'true') || (no_bundle == 'true')
       end
 
       no_commands do

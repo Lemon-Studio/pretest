@@ -13,7 +13,6 @@ module Pretest
     method_option :ios_scaffold, type: :boolean, desc: 'Create a Mobile Automation Structure with iOS examples'
     method_option :web_scaffold, type: :boolean, desc: 'Creates a Web Automation Project Structure with some steps, pages and features already created'
     method_option :clean_install, type: :boolean, desc: 'Creates a Clean Web Automation Project Structure'
-    method_option :no_bundle, type: :boolean, desc: 'Sets bundle install to turned off'
 
     def create(name)
       web = options[:web] ? 'true' : 'false'
