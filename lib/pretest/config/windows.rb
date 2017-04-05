@@ -26,6 +26,15 @@ module Windows
     system "del #{file}"
   end
 
+  def remove_windows_duplicated_values
+    path = ENV['PATH'].clone
+    path = path.split(';')
+    path = path.uniq
+    path = path.join(';')
+    path += ';C:\\env_folder'
+    path
+  end
+
   def windows_download(name, url)
     zipfile = url
     resource = RestClient::Resource.new(

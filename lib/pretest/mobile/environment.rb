@@ -46,8 +46,8 @@ export PATH='${PATH}:${ANDROID_HOME}/tools'".tr!("'", '"')
             puts 'ANDROID_HOME is already defined'
           else
             File.open("#{ENV['HOME']}/.pretest", 'a') { |file| file << @android_studio }
-            File.open("#{ENV['HOME']}/.bash_profile", 'a') { |file| file << @set_source }
-            system 'source ~/.bash_profile'
+            File.open("#{ENV['HOME']}/.bashrc", 'a') { |file| file << @set_source }
+            system 'source ~/.bashrc'
             puts 'ANDROID_HOME defined with success'
           end
         end

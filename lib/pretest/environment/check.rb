@@ -25,7 +25,8 @@ module Pretest
         elsif windows?
           Dir.mkdir('C:\\env_folder') unless Dir.entries('C:\\').include?('env_folder')
           Dir.chdir('C:\\env_folder')
-          system 'setx PATH "%PATH%;C:\\env_folder;C:\\Program Files\\Mozilla Firefox;C:\\Program Files (x86)\\Mozilla Firefox"' unless ENV['PATH'].include?('C:\\env_folder') && ENV['PATH'].include?('C:\\Program Files\\Mozilla Firefox') && ENV['PATH'].include?('C:\\Program Files (x86)\\Mozilla Firefox')
+          path = remove_windows_duplicated_values
+          system "setx PATH #{path}" unless ENV['PATH'].include?('C:\\env_folder')
           set_bits
           set_windows_env
           unzip_windows_files
