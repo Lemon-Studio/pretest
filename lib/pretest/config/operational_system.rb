@@ -1,4 +1,3 @@
-
 require_relative 'mac'
 require_relative 'linux'
 require_relative 'windows'
@@ -8,7 +7,7 @@ module Config
   include MacOS
   include Linux
   include Windows
-  include Unix
+  # include Unix
   def mac?
     !(/darwin/ =~ RUBY_PLATFORM).nil?
   end

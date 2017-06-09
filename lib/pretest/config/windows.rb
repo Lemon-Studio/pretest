@@ -1,19 +1,18 @@
 module Windows
-  def unzip_windows_files
-    set_bits
-    unzip_file('chromedriver_win32.zip', '.') unless Dir.entries('.').include?('chromedriver.exe')
-    unzip_file('phantomjs-2.1.1-windows.zip', '.') unless Dir.entries('.').include?('phantomjs.exe') || File.directory?('phantomjs-2.1.1-windows')
-    unzip_file('IEDriverServer_Win32_2.53.1.zip', '.') unless Dir.entries('.').include?('IEDriverServer.exe')
-    unzip_file("geckodriver-v0.15.0-win#{@bits}", '.') unless Dir.entries('.').include?('geckodriver.exe')
+  def set_windows_env
+    Dir.mkdir('C:\\env_folder') unless Dir.entries('C:\\').include?('env_folder')
+    Dir.chdir('C:\\env_folder')
+    puts 'Downloading webdrivers to C:\\env_folder'
+    windows_download
+    puts 'Unziping webdrivers files'
+    unzip_windows_files
+    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\bin') unless Dir.entries('C:\\bin').include?('phantomjs.exe')
+    puts 'Checking Ruby Development Kit...'
+    dk_check_and_install
+    puts 'Please reboot your CMD to load the new environment variables'
   end
 
-  def set_windows_env
-    set_bits
-    windows_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.28/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
-    windows_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
-    windows_download('IEDriverServer_Win32_2.53.1.zip', 'https://selenium-release.storage.googleapis.com/2.53/IEDriverServer_Win32_2.53.1.zip') unless Dir.entries('.').include?('IEDriverServer_Win32_2.53.1.zip') || Dir.entries('.').include?('IEDriverServer.exe')
-    windows_download("geckodriver-v0.15.0-win#{@bits}", "https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-win#{@bits}.zip") unless Dir.entries('.').include?("geckodriver-v0.15.0-win#{@bits}") || Dir.entries('.').include?('geckodriver.exe')
-  end
+  private
 
   def unzip_file(file, destination)
     Zip::File.open(file) do |zip_file|
@@ -26,20 +25,11 @@ module Windows
     system "del #{file}"
   end
 
-  def remove_windows_duplicated_values
-    path = ENV['PATH'].clone
-    path = path.split(';')
-    path = path.uniq
-    path = path.join(';')
-    path += ';C:\\env_folder'
-    path
-  end
-
-  def windows_download(name, url)
+  def zip_download(name, url)
     zipfile = url
     resource = RestClient::Resource.new(
       zipfile,
-      timeout: 60,
+      timeout: 120,
       open_timeout: 60
     )
     response = resource.get
@@ -53,6 +43,35 @@ module Windows
       raise("Response Code was not 200: Response Code #{response.code}")
     end
   end
+
+  def windows_download
+    set_bits
+    Fileutils.rm_rf('chromedriver_win32.zip') if Dir.entries('.').include?('chromedriver_win32.zip')
+    zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.30/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
+    Fileutils.rm_rf('phantomjs-2.1.1-windows.zip') if Dir.entries('.').include?('phantomjs-2.1.1-windows.zip')
+    zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
+    Fileutils.rm_rf('IEDriverServer_Win32_3.4.0.zip') if Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip')
+    zip_download('IEDriverServer_Win32_3.4.0.zip', 'http://selenium-release.storage.googleapis.com/3.4/IEDriverServer_Win32_3.4.0.zip') unless Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip') || Dir.entries('.').include?('IEDriverServer.exe')
+    Fileutils.rm_rf("geckodriver-v0.16.1-win#{@bits}.zip") if Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}.zip")
+    zip_download("geckodriver-v0.16.1-win#{@bits}.zip", "https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-win#{@bits}.zip") unless Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}") || Dir.entries('.').include?('geckodriver.exe')
+  end
+
+  def unzip_windows_files
+    set_bits
+    unzip_file('chromedriver_win32.zip', '.') unless Dir.entries('.').include?('chromedriver.exe')
+    unzip_file('phantomjs-2.1.1-windows.zip', '.') unless Dir.entries('.').include?('phantomjs.exe') || File.directory?('phantomjs-2.1.1-windows')
+    unzip_file('IEDriverServer_Win32_3.4.0.zip', '.') unless Dir.entries('.').include?('IEDriverServer.exe')
+    unzip_file("geckodriver-v0.16.1-win#{@bits}.zip", '.') unless Dir.entries('.').include?('geckodriver.exe')
+  end
+
+  # # This is going to be a new feature.
+  # def remove_windows_duplicated_values
+  #   path = ENV['PATH'].clone
+  #   path = path.split(';')
+  #   path = path.uniq
+  #   path = path.join(';')
+  #   path
+  # end
 
   def dk_check_and_install
     set_bits
@@ -71,7 +90,7 @@ module Windows
     Dir.entries(rbpath).each { |files| rblist << files.to_s }
     if rblist.include?('devkit')
     else
-      windows_download("DevKit-mingw64-#{@devkit}-sfx.exe", "http://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-#{@devkit}-sfx.exe")
+      zip_download("DevKit-mingw64-#{@devkit}-sfx.exe", "http://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-#{@devkit}-sfx.exe")
       unzip_install_dk("DevKit-mingw64-#{@devkit}-sfx.exe")
     end
   end
@@ -85,5 +104,15 @@ module Windows
     system "del #{file}"
     system 'ruby dk.rb init'
     system 'ruby dk.rb install'
+  end
+
+  def move_webdrivers
+    FileUtils.rm_rf('C:\\bin\\phantomjs.exe') if Dir.entries('C:\\bin').include?('phantomjs.exe')
+    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\bin')
+    FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
+    FileUtils.rm_rf('C:\\bin\\chromedriver.exe') if Dir.entries('C:\\bin').include?('chromedriver.exe')
+    FileUtils.mv('chromedriver.exe', 'C:\\bin')
+    FileUtils.rm_rf('C:\\bin\\geckodriver.exe') if Dir.entries('C:\\bin').include?('geckodriver.exe')
+    FileUtils.mv('geckodriver.exe', 'C:\\bin')
   end
 end

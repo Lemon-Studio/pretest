@@ -1,41 +1,76 @@
 <% if web_scaffold == 'true' -%>
+# Visit web page
 Given(/^I am on "([^"]*)"$/) do |site|
   visit(site)
 end
 
+# Click on item by first index
+Given(/^I click on "([^"]*)" item by index$/) do |btn|
+  all("btn")[0].click
+end
+
+# Click on first item
+Given(/^I click on "([^"]*)" first item match$/) do |btn|
+  first(btn).click
+end
+
+# Click on item by button id
 Given(/^I click on "([^"]*)" button$/) do |btn|
   click_button(btn)
 end
 
+# Click on item by text link
+Given(/^I click on "([^"]*)" link$/) do |link|
+  click_link(link)
+end
+
+# Select option by id
 When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, select_box|
   select(option, from: select_box)
 end
 
+# Select option using id
+When(/^I select "([^"]*)" from "([^"]*)" using id option$/) do |option, select_box|
+  select(option, from: select_box)
+end
+
+# Select option using first index
+When(/^I select "([^"]*)" from "([^"]*)" using index option$/) do |option, select_box|
+  select(option, from: select_box)
+end
+
+# Check box using id option
 When(/^I check "([^"]*)" in check box$/) do |check|
   check(check)
 end
 
+# Fill in fields
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, with: value)
 end
 
+# Assert that an element does not exists
 Then(/^I expect to not see "([^"]*)"$/) do |css|
  assert_no_selector(css)
 end
 
+# Click on each button using an Example class based on PageObject
 Given(/^I click on each button$/) do
-  Example.new.buttons_click
+  @example.buttons_click
 end
 
+# Click on each check box using an Example class based on PageObject
 When(/^I check each check box$/) do
-  Example.new.all_check_box
+  @example.all_check_box
 end
 
+# Fill in all fields using an Example class based on PageObject
 When(/^I fill in all fields$/) do
-  Example.new.fill_each_fields
+  @example.fill_each_fields
 end
 
-Then(/^I expect to not see buttons in buttons panel$/) do
-  Example.new.has_no_buttons
+# Assert that a list of buttons is not being showed using an Example class based on PageObject
+Then(/^I expect to see all the buttons in buttons panel$/) do
+  @example.has_buttons
 end
 <% end -%>

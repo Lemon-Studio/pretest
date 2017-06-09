@@ -17,22 +17,12 @@ module Pretest
       def raise_env
         if linux?
           set_bits
-          set_linux_chromedriver
-          set_linux_phantomjs
-          set_linux_geckodriver
+          set_linux_env
         elsif mac?
           set_mac_env
         elsif windows?
-          Dir.mkdir('C:\\env_folder') unless Dir.entries('C:\\').include?('env_folder')
-          Dir.chdir('C:\\env_folder')
-          path = remove_windows_duplicated_values
-          system "setx PATH #{path}" unless ENV['PATH'].include?('C:\\env_folder')
           set_bits
           set_windows_env
-          unzip_windows_files
-          FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\env_folder') unless Dir.entries('C:\\env_folder').include?('phantomjs.exe')
-          dk_check_and_install
-          puts 'Please reboot your CMD to load the new environment variables'
         end
       end
 

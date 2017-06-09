@@ -4,33 +4,26 @@ class Example
   include Capybara::DSL
 
   def buttons_click
-    click_button("btn_one")
-    click_button("btn_two")
-    click_button("btn_three")
-    click_button("btn_link")
+    all("button").each do |btn|
+      btn.click
+    end
   end
 
   def all_check_box
-    check("opt_one")
-    check("opt_two")
-    check("opt_three")
+    all("*[type='checkbox']").each(&:click)
   end
 
   def fill_each_fields
-    fill_in("first_name", with: "FirstTeste")
-    fill_in("mid_name", with: "MidTeste")
-    fill_in("last_name", with: "LastTeste")
-    fill_in("age", with: "20")
-    fill_in("email", with: "teste@testmail.com")
-    fill_in("job", with: "QA")
-    fill_in("gender", with: "undefined")
+    all("input[class='form-control']").each do |field|
+      field.set("#{field['placeholder']} #{rand(100..999)}")
+    end
   end
 
-  def has_no_buttons
-    assert_no_selector("#btn_one")
-    assert_no_selector("#btn_two")
-    assert_no_selector("#btn_three")
-    assert_no_selector("#btn_link")
+  def has_buttons
+    assert_selector("#btn_one")
+    assert_selector("#btn_two")
+    assert_selector("#btn_three")
+    assert_selector("#btn_link")
   end
 
 end

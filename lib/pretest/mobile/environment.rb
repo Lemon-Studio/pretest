@@ -26,16 +26,16 @@ module Pretest
           elsif env == 'ios'
             # set_ios_env
           elsif (env != 'ios') && (env != 'android')
-            puts "You must use one of the following arguments:\n
-  android:\t # pretest mobile_environment android
-  ios:\t\t # pretest mobile_environment ios"
+            puts "You must use one of the following arguments:\n" \
+                 "android:\t # pretest mobile_environment android\n" \
+                 "ios:\t\t # pretest mobile_environment ios"
           end
         end
 
         def set_environment_values
-          @android_studio = "\n\n#Android sdk set path
-export ANDROID_HOME='/usr/local/opt/android-sdk'
-export PATH='${PATH}:${ANDROID_HOME}/tools'".tr!("'", '"')
+          @android_studio = "\n\n#Android sdk set path\n" \
+                            "export ANDROID_HOME='/usr/local/opt/android-sdk'\n" +
+                            "export PATH='${PATH}:${ANDROID_HOME}/tools'".tr!("'", '"')
           @set_source = "\n[[ -s '$HOME/.pretest'  ]] && source '$HOME/.pretest' # Load environment variables defined in pretest".tr!("'", '"')
         end
 

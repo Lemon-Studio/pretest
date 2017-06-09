@@ -1,3 +1,9 @@
 <% if web == 'true' || ( ios == 'false' && android == 'false' ) -%>
 require 'selenium-webdriver'
 <% end -%>
+<% if web_scaffold == 'true' -%>
+
+After do
+  @example = Example.new
+end
+<% end -%>

@@ -18,5 +18,5 @@ Feature: Validate Vilas Boas IT Tests page.
   When I select "ExampleOne" from "select_box"
   And I check each check box
   And I fill in all fields
-  Then I expect to not see buttons in buttons panel
+  Then I expect to see all the buttons in buttons panel
 <% end -%>
