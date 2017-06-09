@@ -48,13 +48,13 @@ module Windows
 
   def windows_download
     set_bits
-    Fileutils.rm_rf('chromedriver_win32.zip') if Dir.entries('.').include?('chromedriver_win32.zip')
+    FileUtils.rm_rf('chromedriver_win32.zip') if Dir.entries('.').include?('chromedriver_win32.zip')
     zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.30/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
-    Fileutils.rm_rf('phantomjs-2.1.1-windows.zip') if Dir.entries('.').include?('phantomjs-2.1.1-windows.zip')
+    FileUtils.rm_rf('phantomjs-2.1.1-windows.zip') if Dir.entries('.').include?('phantomjs-2.1.1-windows.zip')
     zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
-    Fileutils.rm_rf('IEDriverServer_Win32_3.4.0.zip') if Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip')
+    FileUtils.rm_rf('IEDriverServer_Win32_3.4.0.zip') if Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip')
     zip_download('IEDriverServer_Win32_3.4.0.zip', 'http://selenium-release.storage.googleapis.com/3.4/IEDriverServer_Win32_3.4.0.zip') unless Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip') || Dir.entries('.').include?('IEDriverServer.exe')
-    Fileutils.rm_rf("geckodriver-v0.16.1-win#{@bits}.zip") if Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}.zip")
+    FileUtils.rm_rf("geckodriver-v0.16.1-win#{@bits}.zip") if Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}.zip")
     zip_download("geckodriver-v0.16.1-win#{@bits}.zip", "https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-win#{@bits}.zip") unless Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}") || Dir.entries('.').include?('geckodriver.exe')
   end
 
