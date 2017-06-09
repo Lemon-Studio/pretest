@@ -59,6 +59,7 @@ module Windows
     FileUtils.rm_rf('IEDriverServer.exe') if Dir.entries('.').include?('IEDriverServer.exe')
     FileUtils.rm_rf('geckodriver.exe') if Dir.entries('.').include?('geckodriver.exe')
     FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
+    FileUtils.rm_rf('phantomjs.exe') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
 
     zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.30/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
     zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
@@ -136,6 +137,7 @@ module Windows
       return path if path.upcase.include?('RUBY') && path.upcase.include?('BIN')
     end
     raise "We couldn't locate the ruby installed on the current machine" if rb_path.nil?
+    puts "We're going to move the webdrivers to '#{rb_path}'"
     rb_path
   end
 end
