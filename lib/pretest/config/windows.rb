@@ -58,7 +58,7 @@ module Windows
     FileUtils.rm_rf('chromedriver.exe') if Dir.entries('.').include?('chromedriver.exe')
     FileUtils.rm_rf('IEDriverServer.exe') if Dir.entries('.').include?('IEDriverServer.exe')
     FileUtils.rm_rf('geckodriver.exe') if Dir.entries('.').include?('geckodriver.exe')
-    FileUtils.rm_rf('phantomjs.exe') if Dir.entries('.').include?('phantomjs.exe')
+    FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
 
     zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.30/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
     zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
@@ -122,12 +122,12 @@ module Windows
     FileUtils.rm_rf("#{@ruby}}\\chromedriver.exe") if Dir.entries(@ruby).include?('chromedriver.exe')
     FileUtils.rm_rf("#{@ruby}}\\IEDriverServer.exe") if Dir.entries(@ruby).include?('IEDriverServer.exe')
 
-    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', @ruby)
-    FileUtils.mv('chromedriver.exe', @ruby)
-    FileUtils.mv('IEDriverServer.exe', @ruby)
-    FileUtils.mv('geckodriver.exe', @ruby)
+    FileUtils.mv('C:\\env_folder\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe', @ruby)
+    FileUtils.mv('C:\\env_folder\\chromedriver.exe', @ruby)
+    FileUtils.mv('C:\\env_folder\\IEDriverServer.exe', @ruby)
+    FileUtils.mv('C:\\env_folder\\geckodriver.exe', @ruby)
 
-    FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
+    FileUtils.rm_rf('C:\\env_folder\\phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
   end
 
   def get_ruby_path
