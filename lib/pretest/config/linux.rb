@@ -27,8 +27,8 @@ module Linux
 
   def set_linux_geckodriver
     remove_bin('geckodriver')
-    system "sudo rm -rf geckodriver-v0.16.1-linux64.tar.gz" if Dir.entries('.').include?("geckodriver-v0.16.1-linux64.tar.gz")
-    system "sudo rm -rf geckodriver-v0.16.1-linux64" if Dir.entries('.').include?("geckodriver-v0.16.1-linux64")
+    system 'sudo rm -rf geckodriver-v0.16.1-linux64.tar.gz' if Dir.entries('.').include?('geckodriver-v0.16.1-linux64.tar.gz')
+    system 'sudo rm -rf geckodriver-v0.16.1-linux64' if Dir.entries('.').include?('geckodriver-v0.16.1-linux64')
     system 'sudo curl -OL https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz'
     system 'sudo tar -xvzf geckodriver-v0.16.1-linux64.tar.gz'
     system 'sudo chmod +x geckodriver'

@@ -4,14 +4,15 @@ module Windows
   def set_windows_env
     Dir.mkdir('C:\\env_folder') unless Dir.entries('C:\\').include?('env_folder')
     Dir.chdir('C:\\env_folder')
+    @ruby = get_ruby_path
     puts 'Downloading webdrivers to C:\\env_folder'
     windows_download
     puts 'Unziping webdrivers files'
     unzip_windows_files
-    FileUtils.mv('C:\\env_folder\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\windows') unless Dir.entries('C:\\windows').include?('phantomjs.exe')
+    FileUtils.mv('C:\\env_folder\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe', @ruby) unless Dir.entries(@ruby).include?('phantomjs.exe')
     puts 'Checking Ruby Development Kit...'
     dk_check_and_install
-    puts 'Please reboot your CMD to load the new environment variables'
+    move_webdrivers
   end
 
   private
@@ -48,13 +49,21 @@ module Windows
 
   def windows_download
     set_bits
-    FileUtils.rm_rf('chromedriver_win32.zip') if Dir.entries('.').include?('chromedriver_win32.zip')
-    zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.30/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
+    Dir.chdir('C:\\env_folder')
+
     FileUtils.rm_rf('phantomjs-2.1.1-windows.zip') if Dir.entries('.').include?('phantomjs-2.1.1-windows.zip')
-    zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
     FileUtils.rm_rf('IEDriverServer_Win32_3.4.0.zip') if Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip')
-    zip_download('IEDriverServer_Win32_3.4.0.zip', 'http://selenium-release.storage.googleapis.com/3.4/IEDriverServer_Win32_3.4.0.zip') unless Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip') || Dir.entries('.').include?('IEDriverServer.exe')
     FileUtils.rm_rf("geckodriver-v0.16.1-win#{@bits}.zip") if Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}.zip")
+    FileUtils.rm_rf('chromedriver_win32.zip') if Dir.entries('.').include?('chromedriver_win32.zip')
+
+    FileUtils.rm_rf('chromedriver.exe') if Dir.entries('.').include?('chromedriver.exe')
+    FileUtils.rm_rf('IEDriverServer.exe') if Dir.entries('.').include?('IEDriverServer.exe')
+    FileUtils.rm_rf('geckodriver.exe') if Dir.entries('.').include?('geckodriver.exe')
+    FileUtils.rm_rf('phantomjs.exe') if Dir.entries('.').include?('phantomjs.exe')
+
+    zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.30/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
+    zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
+    zip_download('IEDriverServer_Win32_3.4.0.zip', 'http://selenium-release.storage.googleapis.com/3.4/IEDriverServer_Win32_3.4.0.zip') unless Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip') || Dir.entries('.').include?('IEDriverServer.exe')
     zip_download("geckodriver-v0.16.1-win#{@bits}.zip", "https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-win#{@bits}.zip") unless Dir.entries('.').include?("geckodriver-v0.16.1-win#{@bits}") || Dir.entries('.').include?('geckodriver.exe')
   end
 
@@ -109,12 +118,24 @@ module Windows
   end
 
   def move_webdrivers
-    FileUtils.rm_rf('C:\\windows\\phantomjs.exe') if Dir.entries('C:\\windows').include?('phantomjs.exe')
-    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\windows')
+    FileUtils.rm_rf("#{@ruby}}\\phantomjs.exe") if Dir.entries(@ruby).include?('phantomjs.exe')
     FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
-    FileUtils.rm_rf('C:\\windows\\chromedriver.exe') if Dir.entries('C:\\windows').include?('chromedriver.exe')
-    FileUtils.mv('chromedriver.exe', 'C:\\windows')
-    FileUtils.rm_rf('C:\\windows\\geckodriver.exe') if Dir.entries('C:\\windows').include?('geckodriver.exe')
-    FileUtils.mv('geckodriver.exe', 'C:\\windows')
+    FileUtils.rm_rf("#{@ruby}}\\geckodriver.exe") if Dir.entries(@ruby).include?('geckodriver.exe')
+    FileUtils.rm_rf("#{@ruby}}\\chromedriver.exe") if Dir.entries(@ruby).include?('chromedriver.exe')
+    FileUtils.rm_rf("#{@ruby}}\\IEDriverServer.exe") if Dir.entries(@ruby).include?('IEDriverServer.exe')
+
+    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', @ruby)
+    FileUtils.mv('chromedriver.exe', @ruby)
+    FileUtils.mv('IEDriverServer.exe', @ruby)
+    FileUtils.mv('geckodriver.exe', @ruby)
+  end
+
+  def get_ruby_path
+    env = ENV['PATH'].split(';')
+    rb_path = env.each do |path|
+      return path if path.upcase.include?('RUBY') && path.upcase.include?('BIN')
+    end
+    raise "We couldn't locate the ruby installed on the current machine" if rb_path.nil?
+    rb_path
   end
 end
