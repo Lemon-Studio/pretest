@@ -9,7 +9,6 @@ module Windows
     windows_download
     puts 'Unziping webdrivers files'
     unzip_windows_files
-    FileUtils.mv('C:\\env_folder\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe', @ruby) unless Dir.entries(@ruby).include?('phantomjs.exe')
     puts 'Checking Ruby Development Kit...'
     dk_check_and_install
     move_webdrivers
