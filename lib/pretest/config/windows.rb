@@ -109,6 +109,7 @@ module Windows
 
   def unzip_install_dk(file)
     Dir.chdir('C:\\env_folder')
+    FileUtils.rm_rf('C:\\env_folder\\devkit') if Dir.entries('C:\\env_folder').include?('devkit')
     Dir.mkdir('devkit')
     FileUtils.mv(file.to_s, 'C:\\env_folder\\devkit\\')
     Dir.chdir('devkit')

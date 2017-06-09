@@ -35,11 +35,5 @@ module Pretest
     def mobile_environment(env)
       Pretest::Mobile::Environment.start([env])
     end
-
-    desc 'start_webdriver', 'Simulate Capybara/Selenium interactions with the defined WebDriver'
-
-    def start_webdriver(webdriver)
-      Pretest::WebDriver::Simulate.start([webdriver])
-    end
   end
 end
