@@ -118,7 +118,6 @@ module Windows
 
   def move_webdrivers
     FileUtils.rm_rf("#{@ruby}}\\phantomjs.exe") if Dir.entries(@ruby).include?('phantomjs.exe')
-    FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
     FileUtils.rm_rf("#{@ruby}}\\geckodriver.exe") if Dir.entries(@ruby).include?('geckodriver.exe')
     FileUtils.rm_rf("#{@ruby}}\\chromedriver.exe") if Dir.entries(@ruby).include?('chromedriver.exe')
     FileUtils.rm_rf("#{@ruby}}\\IEDriverServer.exe") if Dir.entries(@ruby).include?('IEDriverServer.exe')
@@ -127,6 +126,8 @@ module Windows
     FileUtils.mv('chromedriver.exe', @ruby)
     FileUtils.mv('IEDriverServer.exe', @ruby)
     FileUtils.mv('geckodriver.exe', @ruby)
+
+    FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
   end
 
   def get_ruby_path
