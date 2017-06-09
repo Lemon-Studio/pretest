@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
   spec.add_runtime_dependency 'thor', '~> 0'
-  spec.add_runtime_dependency 'bundler'
+  spec.add_runtime_dependency 'bundler', '~> 0'
   spec.add_runtime_dependency 'rubyzip', '~> 1.2', '>= 1.2.1'
   spec.add_runtime_dependency 'rest-client', '~> 2.0', '>= 2.0.2'
   spec.add_runtime_dependency 'pry', '~> 0.10.4'
