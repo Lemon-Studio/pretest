@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Windows
   def set_windows_env
     Dir.mkdir('C:\\env_folder') unless Dir.entries('C:\\').include?('env_folder')
@@ -6,7 +8,7 @@ module Windows
     windows_download
     puts 'Unziping webdrivers files'
     unzip_windows_files
-    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\bin') unless Dir.entries('C:\\bin').include?('phantomjs.exe')
+    FileUtils.mv('C:\\env_folder\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\windows') unless Dir.entries('C:\\windows').include?('phantomjs.exe')
     puts 'Checking Ruby Development Kit...'
     dk_check_and_install
     puts 'Please reboot your CMD to load the new environment variables'
@@ -107,12 +109,12 @@ module Windows
   end
 
   def move_webdrivers
-    FileUtils.rm_rf('C:\\bin\\phantomjs.exe') if Dir.entries('C:\\bin').include?('phantomjs.exe')
-    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\bin')
+    FileUtils.rm_rf('C:\\windows\\phantomjs.exe') if Dir.entries('C:\\windows').include?('phantomjs.exe')
+    FileUtils.mv('phantomjs-2.1.1-windows\\bin\\phantomjs.exe', 'C:\\windows')
     FileUtils.rm_rf('phantomjs-2.1.1-windows') if Dir.entries('.').include?('phantomjs-2.1.1-windows')
-    FileUtils.rm_rf('C:\\bin\\chromedriver.exe') if Dir.entries('C:\\bin').include?('chromedriver.exe')
-    FileUtils.mv('chromedriver.exe', 'C:\\bin')
-    FileUtils.rm_rf('C:\\bin\\geckodriver.exe') if Dir.entries('C:\\bin').include?('geckodriver.exe')
-    FileUtils.mv('geckodriver.exe', 'C:\\bin')
+    FileUtils.rm_rf('C:\\windows\\chromedriver.exe') if Dir.entries('C:\\windows').include?('chromedriver.exe')
+    FileUtils.mv('chromedriver.exe', 'C:\\windows')
+    FileUtils.rm_rf('C:\\windows\\geckodriver.exe') if Dir.entries('C:\\windows').include?('geckodriver.exe')
+    FileUtils.mv('geckodriver.exe', 'C:\\windows')
   end
 end
