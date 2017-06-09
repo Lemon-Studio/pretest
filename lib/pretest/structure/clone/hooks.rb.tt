@@ -3,7 +3,7 @@ require 'selenium-webdriver'
 <% end -%>
 <% if web_scaffold == 'true' -%>
 
-After do
+Before do
   @example = Example.new
 end
 <% end -%>
