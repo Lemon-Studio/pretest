@@ -630,7 +630,7 @@ the exclusion of warranty; and each file should have at least the
         Pretest is a gem that helps you to start your automation projects.
         With pretest you can start and configure your environment for web and mobile
         automation projects with just a few commands.
-        Copyright (C) 2016  VilasBoasIT Team (Lucas Machado and Murilo Machado)
+        Copyright (C) 2016  LemonStudioLTDA Team (Lucas Machado and Murilo Machado)
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU Affero General Public License as
