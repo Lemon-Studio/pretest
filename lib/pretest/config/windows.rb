@@ -91,9 +91,7 @@ module Windows
     rbpath = ''
     rblist = ''
     rbenv += ENV['PATH']
-    if ENV['PATH'].include?('Ruby') == false
-      raise 'There is no Ruby environment variable defined in current PATH'
-    end
+    raise 'There is no Ruby environment variable defined in current PATH' if ENV['PATH'].include?('Ruby') == false
     rbenv = rbenv.split(';')
     rbenv.each do |rb|
       rbpath = rb if rb.include?('Ruby')

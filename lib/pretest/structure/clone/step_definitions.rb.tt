@@ -74,3 +74,56 @@ Then(/^I expect to see all the buttons in buttons panel$/) do
   @example.has_buttons
 end
 <% end -%>
+<% if api_scaffold == 'true' -%>
+# Define default values used on project example
+VALUES = {
+  "default"  =>"",
+  "empty"    =>"",
+  "json_type"=>{
+    :"Content-Type"=>"application/json"
+  }
+}
+
+# Make an simple request and validate his status code
+Given(/^I make an "([^"]*)" in "([^"]*)" and i receive an status "([^"]*)"$/) do |verb, url, status|
+  @url = url
+  response = RestClient::Request.execute(method: verb.downcase.to_sym,
+                                         url:    @url)
+  expect(response.code).to eql(status.to_i)
+end
+
+# Save verb/endpoint/query_params to use in current request
+When(/^I save my verb as "([^"]*)" with endpoint "([^"]*)" using query_params as "([^"]*)"$/) do |verb, endpoint, query_params|
+  @verb         = verb.downcase.to_sym
+  @endpoint     = endpoint
+  @query_params = VALUES[query_params]
+end
+
+# Set header and payload data based on default values
+When(/^I set my header as "([^"]*)" and my payload as "([^"]*)"$/) do |header, payload|
+  @header  = VALUES[header]
+  @payload = VALUES[payload]
+end
+
+# Submit current request with defined configs, and save request/response/body data from request
+When(/^I submit my request$/) do
+  RestClient::Request.execute(method: @verb,
+                              url:     @url + @endpoint + @query_params,
+                              payload: @payload,
+                              header:  @header) do |res,req,results|
+                                @request  = req
+                                @response = res
+                                @body     = JSON.parse(res.body)
+                              end
+end
+
+# Validate status code from current request
+Then(/^I expect to receive an status "([^"]*)"$/) do |status|
+  expect(@response.code).to eql(status.to_i)
+end
+
+# Validate response body format
+Then(/^I expect to receive my response as "([^"]*)" format$/) do |type|
+  expect(@body.class.to_s).to eql(type)
+end
+<% end -%>

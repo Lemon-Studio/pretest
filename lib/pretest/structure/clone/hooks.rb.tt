@@ -1,4 +1,4 @@
-<% if web == 'true' || ( ios == 'false' && android == 'false' ) -%>
+<% if web == 'true' || web_scaffold == 'true' -%>
 require 'selenium-webdriver'
 <% end -%>
 <% if web_scaffold == 'true' -%>

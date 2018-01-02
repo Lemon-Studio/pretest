@@ -1,5 +1,5 @@
-<% if web == 'true' || ( ios == 'false' && android == 'false' ) -%>
-source 'https://rubygems.org'
+<% if web == 'true' || web_scaffold == 'true' -%>
+source 'http://rubygems.org'
 
 gem 'selenium-webdriver',       '3.4.0'
 gem 'cucumber',                 '2.4.0'
@@ -9,7 +9,7 @@ gem 'pry',                      '0.10.4'
 gem 'poltergeist',              '1.15.0'
 <% end -%>
 <% if clean_install == 'true' -%>
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'selenium-webdriver',       '3.4.0'
 gem 'cucumber',                 '2.4.0'
@@ -17,15 +17,23 @@ gem 'rspec',                    '3.6.0'
 gem 'capybara',                 '2.14.1'
 <% end -%>
 <% if ios == 'true' -%>
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 gem "calabash-cucumber",        '0.20.3'
 gem "pry",                      '0.10.4'
 <% end -%>
 <% if android == 'true' -%>
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 gem 'calabash-cucumber',        '0.20.3'
 gem 'calabash-android',         '0.8.4'
 gem 'pry',                      '0.10.4'
+<% end -%>
+<% if api == 'true' || api_scaffold == 'true' -%>
+source "http://rubygems.org"
+
+gem 'cucumber',                 '2.4.0'
+gem 'rspec',                    '3.6.0'
+gem 'pry',                      '0.10.4'
+gem 'rest-client',              '2.0.2'
 <% end -%>
