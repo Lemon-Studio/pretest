@@ -27,7 +27,13 @@ Metrics/LineLength:
     Max: 400
 Metrics/MethodLength:
     Max: 200
+Metrics/ModuleLength:
+    Max: 150
 Metrics/AbcSize:
     Max: 300
 Metrics/BlockLength:
-    Max: 50
+    Max: 60
+Style/CommentedKeyword:
+  Enabled: false
+Style/LambdaCall:
+  Enabled: false

@@ -20,3 +20,16 @@ Feature: Validate Vilas Boas IT Tests page.
   And I fill in all fields
   Then I expect to see all the buttons in buttons panel
 <% end -%>
+<% if api_scaffold == 'true' -%>
+Feature: API examples
+
+  Background: Store the current environment url, and validate the current state
+    Given I make an "GET" in "https://jsonplaceholder.typicode.com/" and i receive an status "200"
+
+  Scenario: Make an simple GET on current environment
+    When I save my verb as "GET" with endpoint "posts" using query_params as "empty"
+    And I set my header as "default" and my payload as "default"
+    And I submit my request
+    Then I expect to receive an status "200"
+    And I expect to receive my response as "Array" format
+<% end -%>
