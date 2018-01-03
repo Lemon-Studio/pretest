@@ -35,3 +35,5 @@ Metrics/BlockLength:
     Max: 60
 Style/CommentedKeyword:
   Enabled: false
+Style/LambdaCall:
+  Enabled: false

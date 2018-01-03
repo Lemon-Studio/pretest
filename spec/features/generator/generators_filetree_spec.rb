@@ -1,14 +1,14 @@
 require 'spec_helper'
 require 'open3'
 
-describe Pretest do
+describe 'Pretest FileTree Checker' do
   before(:each) do
     @current_dir = Dir.pwd
     @dir = Dir.mktmpdir('pretest')
     Dir.chdir(@dir)
   end
 
-  dirs = -> (dir) { Dir.entries(dir) }
+  dirs = ->(dir) { Dir.entries(dir) }
 
   after(:each) do
     FileUtils.rm_rf(@dir)
@@ -24,14 +24,14 @@ describe Pretest do
     support          = "#{folder}/features/support"
     pages            = "#{folder}/features/support/pages"
 
-    root_dir     = %w(cucumber.yml data features Gemfile)
-    features_dir = %w(example.feature step_definitions support)
-    steps_dir    = %w(step_definitions.rb)
-    support_dir  = %w(env.rb hooks.rb pages)
-    pages_dir    = %w(example.rb)
+    root_dir     = %w[cucumber.yml data features Gemfile]
+    features_dir = %w[example.feature step_definitions support]
+    steps_dir    = %w[step_definitions.rb]
+    support_dir  = %w[env.rb hooks.rb pages]
+    pages_dir    = %w[example.rb]
 
-    mobile_dir   = %w(app_installation_hook.rb app_life_cycle_hooks.rb
-                      dry_run.rb first_launch.rb)
+    mobile_dir   = %w[app_installation_hook.rb app_life_cycle_hooks.rb
+                      dry_run.rb first_launch.rb]
 
     expect(dirs.(folder)).to           include(*root_dir)
     expect(dirs.(features)).to         include(*features_dir)
@@ -51,14 +51,14 @@ describe Pretest do
     support          = "#{folder}/features/support"
     pages            = "#{folder}/features/support/pages"
 
-    root_dir     = %w(cucumber.yml data features Gemfile)
-    features_dir = %w(example.feature step_definitions support)
-    steps_dir    = %w(step_definitions.rb)
-    support_dir  = %w(env.rb hooks.rb pages)
-    pages_dir    = %w(example.rb)
+    root_dir     = %w[cucumber.yml data features Gemfile]
+    features_dir = %w[example.feature step_definitions support]
+    steps_dir    = %w[step_definitions.rb]
+    support_dir  = %w[env.rb hooks.rb pages]
+    pages_dir    = %w[example.rb]
 
-    mobile_dir   = %w(app_installation_hook.rb app_life_cycle_hooks.rb
-                      dry_run.rb first_launch.rb)
+    mobile_dir   = %w[app_installation_hook.rb app_life_cycle_hooks.rb
+                      dry_run.rb first_launch.rb]
 
     expect(dirs.(folder)).to           include(*root_dir)
     expect(dirs.(features)).to         include(*features_dir)
@@ -78,14 +78,14 @@ describe Pretest do
     support          = "#{folder}/features/support"
     pages            = "#{folder}/features/support/pages"
 
-    root_dir     = %w(cucumber.yml data features Gemfile)
-    features_dir = %w(example.feature step_definitions support)
-    steps_dir    = %w(step_definitions.rb)
-    support_dir  = %w(env.rb hooks.rb pages)
-    pages_dir    = %w(example.rb)
+    root_dir     = %w[cucumber.yml data features Gemfile]
+    features_dir = %w[example.feature step_definitions support]
+    steps_dir    = %w[step_definitions.rb]
+    support_dir  = %w[env.rb hooks.rb pages]
+    pages_dir    = %w[example.rb]
 
-    mobile_dir   = %w(app_installation_hook.rb app_life_cycle_hooks.rb
-                      dry_run.rb first_launch.rb)
+    mobile_dir   = %w[app_installation_hook.rb app_life_cycle_hooks.rb
+                      dry_run.rb first_launch.rb]
 
     expect(dirs.(folder)).to           include(*root_dir)
     expect(dirs.(features)).to         include(*features_dir)
@@ -105,14 +105,14 @@ describe Pretest do
     support          = "#{folder}/features/support"
     pages            = "#{folder}/features/support/pages"
 
-    root_dir     = %w(cucumber.yml data features Gemfile)
-    features_dir = %w(example.feature step_definitions support)
-    steps_dir    = %w(step_definitions.rb)
-    support_dir  = %w(env.rb hooks.rb pages)
-    pages_dir    = %w(example.rb)
+    root_dir     = %w[cucumber.yml data features Gemfile]
+    features_dir = %w[example.feature step_definitions support]
+    steps_dir    = %w[step_definitions.rb]
+    support_dir  = %w[env.rb hooks.rb pages]
+    pages_dir    = %w[example.rb]
 
-    mobile_dir   = %w(app_installation_hook.rb app_life_cycle_hooks.rb
-                      dry_run.rb first_launch.rb)
+    mobile_dir   = %w[app_installation_hook.rb app_life_cycle_hooks.rb
+                      dry_run.rb first_launch.rb]
 
     expect(dirs.(folder)).to           include(*root_dir)
     expect(dirs.(features)).to         include(*features_dir)
@@ -132,14 +132,14 @@ describe Pretest do
     support          = "#{folder}/features/support"
     pages            = "#{folder}/features/support/pages"
 
-    root_dir     = %w(cucumber.yml data features Gemfile)
-    features_dir = %w(example.feature step_definitions support)
-    steps_dir    = %w(step_definitions.rb)
-    support_dir  = %w(env.rb hooks.rb pages)
-    pages_dir    = %w(example.rb)
+    root_dir     = %w[cucumber.yml data features Gemfile]
+    features_dir = %w[example.feature step_definitions support]
+    steps_dir    = %w[step_definitions.rb]
+    support_dir  = %w[env.rb hooks.rb pages]
+    pages_dir    = %w[example.rb]
 
-    ios          = %w(first_launch.rb dry_run.rb)
-    android      = %w(app_installation_hook.rb app_life_cycle_hooks.rb)
+    ios          = %w[first_launch.rb dry_run.rb]
+    android      = %w[app_installation_hook.rb app_life_cycle_hooks.rb]
 
     expect(dirs.(folder)).to           include(*root_dir)
     expect(dirs.(features)).to         include(*features_dir)
@@ -159,14 +159,14 @@ describe Pretest do
     support          = "#{folder}/features/support"
     pages            = "#{folder}/features/support/pages"
 
-    root_dir     = %w(cucumber.yml data features Gemfile)
-    features_dir = %w(example.feature step_definitions support)
-    steps_dir    = %w(step_definitions.rb)
-    support_dir  = %w(env.rb hooks.rb pages)
-    pages_dir    = %w(example.rb)
+    root_dir     = %w[cucumber.yml data features Gemfile]
+    features_dir = %w[example.feature step_definitions support]
+    steps_dir    = %w[step_definitions.rb]
+    support_dir  = %w[env.rb hooks.rb pages]
+    pages_dir    = %w[example.rb]
 
-    ios          = %w(first_launch.rb dry_run.rb)
-    android      = %w(app_installation_hook.rb app_life_cycle_hooks.rb)
+    ios          = %w[first_launch.rb dry_run.rb]
+    android      = %w[app_installation_hook.rb app_life_cycle_hooks.rb]
 
     expect(dirs.(folder)).to           include(*root_dir)
     expect(dirs.(features)).to         include(*features_dir)
@@ -185,8 +185,7 @@ describe Pretest do
     log, val = Open3.capture2e("pretest create #{dir_name}")
     log = log.to_s
 
-    expect(log).to            include("ERROR")
+    expect(log).to include('ERROR')
     expect(dirs.('.')).not_to include(dir_name)
   end
-
 end
