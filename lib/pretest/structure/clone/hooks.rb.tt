@@ -1,4 +1,13 @@
-<% if web == 'true' || ( ios == 'false' && android == 'false' ) -%>
+<% if web        == 'false' &&
+ ( web_scaffold  == 'false' &&
+ ( api           == 'false' &&
+ ( api_scaffold  == 'false' &&
+ ( clean_install == 'false' &&
+ ( ios           == 'false' &&
+ ( android       == 'false')))))) -%>
+require 'selenium-webdriver'
+ <% end -%>
+<% if web == 'true' || web_scaffold == 'true' -%>
 require 'selenium-webdriver'
 <% end -%>
 <% if web_scaffold == 'true' -%>
