@@ -34,6 +34,8 @@ We have commands to create a new project structure, and a new project scaffold w
 <li>pretest environment</li>
 <li>pretest create project_name</li>
 <li>pretest create project_name --web_scaffold</li>
+<li>pretest create project_name --api</li>
+<li>pretest create project_name --api_scaffold</li>
 </ul>
 
 <h2>Usage</h2>
