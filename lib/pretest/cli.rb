@@ -32,13 +32,6 @@ module Pretest
       ios           = options[:ios]           ? 'true' : 'false'
       android       = options[:android]       ? 'true' : 'false'
 
-      # puts "\ncreate\napi #{api}\n" \
-      #      "api_scaffold #{api_scaffold}\n" \
-      #      "web_scaffold #{web_scaffold}\n" \
-      #      "android #{android}\n" \
-      #      "ios #{ios}\n" \
-      #      "clean_install #{clean_install}\n" \
-      #      "web #{web}\n"
       Pretest::Structure::Clone.start([name,
                                        web,
                                        web_scaffold,

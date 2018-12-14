@@ -130,13 +130,11 @@ describe 'Pretest FileTree Checker' do
     features         = "#{folder}/features"
     step_definitions = "#{folder}/features/step_definitions"
     support          = "#{folder}/features/support"
-    pages            = "#{folder}/features/support/pages"
 
     root_dir     = %w[cucumber.yml data features Gemfile]
     features_dir = %w[example.feature step_definitions support]
     steps_dir    = %w[step_definitions.rb]
     support_dir  = %w[env.rb hooks.rb pages]
-    pages_dir    = %w[example.rb]
 
     ios          = %w[first_launch.rb dry_run.rb]
     android      = %w[app_installation_hook.rb app_life_cycle_hooks.rb]
@@ -182,7 +180,7 @@ describe 'Pretest FileTree Checker' do
     folder   = 'pretest_spec'
     dir_name = "#{folder} name"
 
-    log, val = Open3.capture2e("pretest create #{dir_name}")
+    log, = Open3.capture2e("pretest create #{dir_name}")
     log = log.to_s
 
     expect(log).to include('ERROR')

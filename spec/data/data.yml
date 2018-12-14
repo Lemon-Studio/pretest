@@ -26,7 +26,7 @@ features:
                  Feature: Validate Vilas Boas IT Tests page.
 
                    Background:
-                   Given I am on "http://vilasboasit.com/tests.html"
+                   Given I am on "https://lemonstudio.io/trainning"
 
                    @tag @tag1
                    Scenario: Check buttons, select box, checkbox, and fields in current page

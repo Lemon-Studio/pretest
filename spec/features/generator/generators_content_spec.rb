@@ -132,7 +132,7 @@ describe 'Pretest Content Checker' do
     gemfile_content = "#{folder}/Gemfile"
     cukes_content   = "#{folder}/cucumber.yml"
 
-    gemfile_data    = "calabash-cucumber"
+    gemfile_data    = 'calabash-cucumber'
 
     expect(content.(feature_file)).to         be_empty
     expect(content.(steps_content)).to        be_empty
