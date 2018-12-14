@@ -32,13 +32,6 @@ module Pretest
         Dir.mkdir(name) unless File.exist?(name)
         Dir.chdir(name)
         dir_list
-        # puts "\nclone\napi #{api}\n" \
-        #      "api_scaffold #{api_scaffold}\n" \
-        #      "web_scaffold #{web_scaffold}\n" \
-        #      "android #{android}\n" \
-        #      "ios #{ios}\n" \
-        #      "clean_install #{clean_install}\n" \
-        #      "web #{web}\n"
       end
 
       def cucumber_yml_clone

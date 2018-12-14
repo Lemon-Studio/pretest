@@ -53,7 +53,7 @@ module Windows
 
     FileUtils.rm_rf('C:\\env_folder\\phantomjs-2.1.1-windows.zip') if Dir.entries('C:\\env_folder').include?('phantomjs-2.1.1-windows.zip')
     FileUtils.rm_rf('C:\\env_folder\\IEDriverServer_Win32_3.4.0.zip') if Dir.entries('C:\\env_folder').include?('IEDriverServer_Win32_3.4.0.zip')
-    FileUtils.rm_rf("C:\\env_folder\\geckodriver-v0.19.1-win#{@bits}.zip") if Dir.entries('C:\\env_folder').include?("geckodriver-v0.19.1-win#{@bits}.zip")
+    FileUtils.rm_rf("C:\\env_folder\\geckodriver-v0.23.0-win#{@bits}.zip") if Dir.entries('C:\\env_folder').include?("geckodriver-v0.23.0-win#{@bits}.zip")
     FileUtils.rm_rf('C:\\env_folder\\chromedriver_win32.zip') if Dir.entries('C:\\env_folder').include?('chromedriver_win32.zip')
 
     FileUtils.rm_rf('C:\\env_folder\\chromedriver.exe') if Dir.entries('C:\\env_folder').include?('chromedriver.exe')
@@ -62,10 +62,10 @@ module Windows
     FileUtils.rm_rf('C:\\env_folder\\phantomjs-2.1.1-windows') if Dir.entries('C:\\env_folder').include?('phantomjs-2.1.1-windows')
     FileUtils.rm_rf('C:\\env_folder\\phantomjs.exe') if Dir.entries('C:\\env_folder').include?('phantomjs.exe')
 
-    zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.34/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
+    zip_download('chromedriver_win32.zip', 'https://chromedriver.storage.googleapis.com/2.45/chromedriver_win32.zip') unless Dir.entries('.').include?('chromedriver_win32.zip') || Dir.entries('.').include?('chrome.exe')
     zip_download('phantomjs-2.1.1-windows.zip', 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip') unless Dir.entries('.').include?('phantomjs-2.1.1-windows.zip') || Dir.entries('.').include?('phantomjs.exe')
     zip_download('IEDriverServer_Win32_3.4.0.zip', 'http://selenium-release.storage.googleapis.com/3.4/IEDriverServer_Win32_3.4.0.zip') unless Dir.entries('.').include?('IEDriverServer_Win32_3.4.0.zip') || Dir.entries('.').include?('IEDriverServer.exe')
-    zip_download("geckodriver-v0.19.1-win#{@bits}.zip", "https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-win#{@bits}.zip") unless Dir.entries('.').include?("geckodriver-v0.19.1-win#{@bits}") || Dir.entries('.').include?('geckodriver.exe')
+    zip_download("geckodriver-v0.23.0-win#{@bits}.zip", "https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-win#{@bits}.zip") unless Dir.entries('.').include?("geckodriver-v0.23.0-win#{@bits}") || Dir.entries('.').include?('geckodriver.exe')
   end
 
   def unzip_windows_files
@@ -73,25 +73,17 @@ module Windows
     unzip_file('chromedriver_win32.zip', '.') unless Dir.entries('.').include?('chromedriver.exe')
     unzip_file('phantomjs-2.1.1-windows.zip', '.') unless Dir.entries('.').include?('phantomjs.exe') || File.directory?('phantomjs-2.1.1-windows')
     unzip_file('IEDriverServer_Win32_3.4.0.zip', '.') unless Dir.entries('.').include?('IEDriverServer.exe')
-    unzip_file("geckodriver-v0.19.1-win#{@bits}.zip", '.') unless Dir.entries('.').include?('geckodriver.exe')
+    unzip_file("geckodriver-v0.23.0-win#{@bits}.zip", '.') unless Dir.entries('.').include?('geckodriver.exe')
   end
-
-  # # This is going to be a new feature.
-  # def remove_windows_duplicated_values
-  #   path = ENV['PATH'].clone
-  #   path = path.split(';')
-  #   path = path.uniq
-  #   path = path.join(';')
-  #   path
-  # end
 
   def dk_check_and_install
     set_bits
-    rbenv = ''
+    rbenv  = ''
     rbpath = ''
     rblist = ''
     rbenv += ENV['PATH']
     raise 'There is no Ruby environment variable defined in current PATH' if ENV['PATH'].include?('Ruby') == false
+
     rbenv = rbenv.split(';')
     rbenv.each do |rb|
       rbpath = rb if rb.include?('Ruby')
@@ -137,6 +129,7 @@ module Windows
       return path if path.upcase.include?('RUBY') && path.upcase.include?('BIN')
     end
     raise "We couldn't locate the ruby installed on the current machine" if rb_path.nil?
+
     rb_path
   end
 end

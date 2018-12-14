@@ -62,8 +62,8 @@ We have commands to create a new project structure, and a new project scaffold w
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/machado144/pretest.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Lemon-Studio/pretest.
 
 ## License
 
-The code licensed here under the GNU Affero General Public License, version 3 AGPL-3.0. [GNU AGPL 3.0 License](https://github.com/machado144/pretest/blob/master/LICENSE.txt). Pretest has been developed by the LemonStudioLTDA team (Lucas Machado and Murilo Machado), as detailed in [LemonStudioLTDA Website](http://www.vilasboasit.com).
+The code licensed here under the GNU Affero General Public License, version 3 AGPL-3.0. [GNU AGPL 3.0 License](https://github.com/Lemon-Studio/pretest/blob/master/LICENSE.txt). Pretest has been developed by the LemonStudioLTDA team (Lucas Machado and Murilo Machado), as detailed in [LemonStudioLTDA Website](http://www.vilasboasit.com).
